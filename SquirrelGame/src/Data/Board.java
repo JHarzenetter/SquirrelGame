@@ -5,10 +5,11 @@ public class Board{
 
     private BoardConfig bc = new BoardConfig();
     private Entity[] board = new Entity[bc.getAmoutnOfEntiies()];
-    private XY[] xy = getRand();
+    private XY[] xy;
     private int id=0;
 
     public Board(){
+        xy = getRand();
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
             board[id] = new BadBeast(id,xy[id].getX(),xy[id].getY());
             id++;
@@ -72,7 +73,7 @@ public class Board{
 
     public Entity[][] flattend(){
         Entity[][] flattendBoard = new Entity[bc.getLength()][bc.getHeight()];
-        for(int i=0; i<board.length; i++){
+        for(int i=0; i<board.length-1; i++){
             flattendBoard[board[i].place.getX()][board[i].place.getY()] = board[i];
         }
         return flattendBoard;

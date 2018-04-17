@@ -15,7 +15,7 @@ public abstract class Game{
         FlattenedBoard fb = new FlattenedBoard(new Board());
         UserInterface ui;
         ConsoleUI cui = new ConsoleUI();
-        cui.render(fb);
+        System.out.println(cui.render(fb));
     }
 
     public void run(){

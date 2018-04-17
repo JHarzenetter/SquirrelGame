@@ -10,6 +10,8 @@ public class BoardConfig{
     private int amountOfGoodPlant = 4;
     private int amountOfWall = 5;
 
+    //21 + 40 +40 + 49 +49 = 199
+
     public int getLength(){return length;}
     public int getHeight(){return height;}
     public int getAmountOfBadBeast(){return amountOfBadBeast;}
@@ -17,6 +19,6 @@ public class BoardConfig{
     public int getAmountOfBadPlant(){return amountOfBadPlant;}
     public int getAmountOfGoodPlant(){return amountOfGoodPlant;}
     public int getAmountOfWall(){return amountOfWall;}
-    public int getAmoutnOfEntiies(){return ((length+height)*2+amountOfBadBeast+amountOfGoodBeast+amountOfGoodPlant+amountOfBadPlant+amountOfWall);}
+    public int getAmoutnOfEntiies(){return ((length+height)*2 + 19);}
 
 }

@@ -10,6 +10,7 @@ public class ConsoleUI implements UserInterface{
             for(int k = 0; k< view.getSize().getY(); k++){
                 s += view.getEntityType(i,k).getWert();
             }
+            s= s + "\n";
         }
         return s;
     }

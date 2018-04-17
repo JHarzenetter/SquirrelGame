@@ -1,7 +1,7 @@
 package Data;
 
 public enum EntityType {
-    BadPlant("BP") , GoodPlant("GP") , BadBeast("BB") , Goodbeast("GB") , MasterSquirrel("MA") , MiniSquirrel("MI") , Wall("W") , Air("");
+    BadPlant("-") , GoodPlant("+") , BadBeast("/") , Goodbeast("*") , MasterSquirrel("M") , MiniSquirrel("s") , Wall("W") , Air(" ");
 
     private final String wert;
 
