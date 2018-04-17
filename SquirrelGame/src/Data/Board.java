@@ -79,7 +79,18 @@ public class Board{
         return flattendBoard;
     }
 
-    public void removeEntity(){}
+    public void removeEntity(Entity e){
+        Entity[] tboard = new Entity[board.length-1];
+        int k = 0;
+        for(int i=0; i<board.length-1 ; i++){
+            if(e.place == board[i].place) {
+                k = 1;
+            } else {
+                tboard[i-k] = board[i];
+            }
+        }
+        board = tboard;
+    }
 
     public int getXsize(){
         return bc.getLength();

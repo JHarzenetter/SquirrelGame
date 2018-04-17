@@ -63,7 +63,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
     @Override
     public void kill(Entity e) {
-
+        b.removeEntity(e);
     }
 
     @Override
