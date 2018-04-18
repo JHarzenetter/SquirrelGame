@@ -2,8 +2,8 @@ package Data;
 
 public class BoardConfig{
 
-    private int length = 50;
-    private int height = 40;
+    private int length = 30;
+    private int height = 20;
     private int amountOfBadBeast = 4;
     private int amountOfGoodBeast = 4;
     private int amountOfBadPlant = 4;
@@ -19,6 +19,6 @@ public class BoardConfig{
     public int getAmountOfBadPlant(){return amountOfBadPlant;}
     public int getAmountOfGoodPlant(){return amountOfGoodPlant;}
     public int getAmountOfWall(){return amountOfWall;}
-    public int getAmoutnOfEntiies(){return ((length+height)*2 + 19);}
+    public int getAmoutnOfEntiies(){return ((length+height)*2 -2+amountOfBadBeast+amountOfGoodBeast+amountOfBadPlant+amountOfGoodPlant+amountOfWall);}
 
 }

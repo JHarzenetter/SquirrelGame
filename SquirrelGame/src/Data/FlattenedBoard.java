@@ -23,6 +23,10 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             return EntityType.GoodPlant;
         if(e instanceof Wall)
             return EntityType.Wall;
+        if(e instanceof MiniSquirrel)
+            return EntityType.MiniSquirrel;
+        if(e instanceof MasterSquirrel)
+            return EntityType.MasterSquirrel;
         return EntityType.Air;
     }
 
@@ -35,6 +39,10 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             return EntityType.Goodbeast;
         if(fb[x][y] instanceof GoodPlant)
             return EntityType.GoodPlant;
+        if(fb[x][y] instanceof MiniSquirrel)
+            return EntityType.MiniSquirrel;
+        if(fb[x][y] instanceof MasterSquirrel)
+            return EntityType.MasterSquirrel;
         if(fb[x][y] instanceof Wall)
             return EntityType.Wall;
         return EntityType.Air;
@@ -68,7 +76,6 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
     @Override
     public void killAndReplace(Entity e) {
-
     }
 
     public XY getSize(){return size;}
