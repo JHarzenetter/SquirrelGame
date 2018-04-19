@@ -25,7 +25,7 @@ public abstract class Game{
     public void run(){
         while(true){
             render();
-            processInput(); // ausgegebene richtung passt noch nicht
+            processInput();
             update();
         }
     }

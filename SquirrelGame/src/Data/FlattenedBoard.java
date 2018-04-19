@@ -53,11 +53,13 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         if(getEntityType(masterSquirrel.place.getX()+direction.getX(),masterSquirrel.place.getY()+direction.getY()) == EntityType.Air && masterSquirrel.stuned == 0){
             masterSquirrel.place = new XY(masterSquirrel.place.getX()+direction.getX(),masterSquirrel.place.getY()+direction.getY());
         }else{
-            if(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].collision(masterSquirrel)){}
+            if(masterSquirrel.stuned > 0){
+                System.out.println("Stunned for " + masterSquirrel.stuned +" rounds");
+                masterSquirrel.setStuned(masterSquirrel.stuned-1);
+            }else if(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].collision(masterSquirrel)){}
             else {
                 masterSquirrel.updateEnergy(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].energy);
             }
-            masterSquirrel.setStuned(masterSquirrel.stuned-1);
         }
     } // collision müsste passen mit allen entitys
 
