@@ -22,32 +22,8 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel{
         return new XY(place.getX()+1, place.getY());
     }
 
-    public void nextStep(int i){
-        switch (i){
-            case 1:
-                if(stuned==0){
-                    moveUp();
-                } else {
-                    stuned--;
-                }
-            case 2:
-                if(stuned == 0){
-                    moveDown();
-                }else{
-                    stuned--;
-                }
-            case 3:
-                if(stuned == 0){
-                    moveLeft();
-                }else{
-                    stuned--;
-                }
-            case 4:
-                if(stuned == 0){
-                    moveRight();
-                }else{
-                    stuned--;
-                }
-        }
+    @Override
+    public void nextStep(EntityContext context) {
+        context.tryToMove(this , moveDirection.getDirection());
     }
 }

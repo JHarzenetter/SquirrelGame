@@ -22,26 +22,28 @@ public class MiniSquirrel extends Squirrel{
     public boolean collision(Entity e) {
         if(e instanceof MasterSquirrel){
             if(e.getID() == MsID){
-                e.updateEnergy(energy);
                 updateEnergy((-energy));
-                return true;
+                return false;
             }
             if(e.getID() != MsID) {
                 updateEnergy((-energy));
-                return true;
+                return false;
             }
         }
         if(e instanceof MiniSquirrel){
             if(((MiniSquirrel) e).MsID != MsID){
-               /* e.death();
-                death();*/
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public String toString(){
         return ("Type: MiniSquirrel " +super.toString());
+    }
+
+    @Override
+    public void nextStep(EntityContext context) {
+
     }
 }

@@ -4,24 +4,28 @@ import UI.ConsoleUI;
 import UI.UserInterface;
 
 public abstract class Game{
-
-    private State state;
+    protected State state;
 
     public Game(State state){
         this.state = state;
     }
 
+
     public static void main(String[] args) {
-        FlattenedBoard fb = new FlattenedBoard(new Board());
         UserInterface ui;
         ConsoleUI cui = new ConsoleUI();
-        System.out.println(cui.render(fb));
+        State s = new State(new Board());
+        FlattenedBoard fb = s.flattenedBoard();
+        GameImpl g = new GameImpl(s);
+
+        System.out.println(""+cui.render(fb));
+        g.run();
     }
 
     public void run(){
         while(true){
             render();
-            processInput();
+            processInput(); // ausgegebene richtung passt noch nicht
             update();
         }
     }

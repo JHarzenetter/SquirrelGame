@@ -3,7 +3,7 @@ package Data;
 public class State {
 
     private int highScore;
-    Board b;
+    private Board b;
 
     public State(Board b){
         this.b = b;
@@ -18,7 +18,11 @@ public class State {
         return new FlattenedBoard(b);
     }
 
-    public void update(){
+    public Board getB(){return b;}
 
+    public void update(){
+        for (int i=0; i<b.getBoard().length-1;i++){
+            b.getBoard()[i].nextStep(flattenedBoard());
+        }
     }
 }

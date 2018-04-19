@@ -1,4 +1,5 @@
 package Data;
+
 import java.util.Random;
 
 public class Board{
@@ -6,10 +7,11 @@ public class Board{
     private BoardConfig bc = new BoardConfig();
     private Entity[] board = new Entity[bc.getAmoutnOfEntiies()];
     private XY[] xy;
+    Random rand = new Random();
     private int id=0;
 
     public Board(){
-        xy = getRand();
+        xy = getRandXY();
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
             board[id] = new BadBeast(id,xy[id].getX(),xy[id].getY());
             id++;
@@ -46,9 +48,8 @@ public class Board{
         id++;
     }
 
-    private XY[] getRand(){
+    private XY[] getRandXY(){
         XY[] randxy = new XY[bc.getAmoutnOfEntiies()];
-        Random rand = new Random();
         int count = 0;
         boolean check;
 
@@ -90,6 +91,39 @@ public class Board{
             }
         }
         board = tboard;
+    }
+
+    public void addEntity(Entity e, int x, int y){
+        Entity[] tboard = board;
+        board = new Entity[board.length+1];
+        for(int i=0; i<tboard.length; i++) {
+            board[i] = tboard[i];
+        }
+        if(e instanceof GoodPlant){
+            board[tboard.length] = new GoodPlant(id,x,y);
+            id++;
+        }
+        if(e instanceof BadPlant){
+            board[tboard.length] = new BadPlant(id,x,y);
+            id++;
+        }
+        if(e instanceof GoodBeast){
+            board[tboard.length] = new GoodBeast(id,x,y);
+            id++;
+        }
+        if(e instanceof BadBeast){
+            board[tboard.length] = new BadBeast(id,x,y);
+            id++;
+        }
+    }
+
+    public void killAndReplace(Entity e) {
+        removeEntity(e);
+        addEntity(e,rand.nextInt((bc.getLength()-2))+1, rand.nextInt((bc.getHeight()-2))+1);
+    }
+
+    public Entity[] getBoard() {
+        return board;
     }
 
     public int getXsize(){

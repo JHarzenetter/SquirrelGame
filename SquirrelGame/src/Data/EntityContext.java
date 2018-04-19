@@ -8,6 +8,5 @@ public interface EntityContext {
     void tryToMove(MasterSquirrel masterSquirrel , XY direction);
     void kill(Entity e);
     void killAndReplace(Entity e);
-    EntityType getEntityType(Entity e);
 
 }

@@ -11,13 +11,17 @@ public class GoodBeast extends Character {
     @Override
     public boolean collision(Entity e) {
         if(e instanceof Squirrel){
-            e.updateEnergy(this.energy);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String toString(){
         return ("Type: GoodBeast " +super.toString());
+    }
+
+    @Override
+    public void nextStep(EntityContext context) {
+        context.tryToMove(this, moveDirection.getDirection());
     }
 }

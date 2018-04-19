@@ -9,10 +9,9 @@ public class BadPlant extends Entity {
 
     public boolean collision(Entity e){
         if(e instanceof Squirrel){
-            e.updateEnergy(this.energy);
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public String toString(){

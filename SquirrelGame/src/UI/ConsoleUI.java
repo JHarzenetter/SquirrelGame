@@ -2,6 +2,9 @@ package UI;
 
 import Data.BoardView;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 public class ConsoleUI implements UserInterface{
 
     public String render(BoardView view){
@@ -15,15 +18,30 @@ public class ConsoleUI implements UserInterface{
         return s;
     }
 
+    public int read(){  //read playerinput
+        System.out.println("1:Left 2:Up 3:Right 4:Down");
+        int read;
+        Scanner s = new Scanner(System.in);
+        read = s.nextInt();
+
+        if(read < 5 && read > 0){
+            return read;
+        } else {
+            System.out.println("Falsche Eingabe! Erneut versuchen.");
+            return read();
+        }
+    }
+
     @Override
     public MoveDirection getCommand() {
-        if(UserInterface.read() == 1)
+        int r = read();
+        if(r == 1)
             return MoveDirection.Left;
-        if(UserInterface.read() == 2)
+        if(r == 2)
             return MoveDirection.Up;
-        if(UserInterface.read() == 3)
+        if(r == 3)
             return MoveDirection.Right;
-        if(UserInterface.read() == 4)
+        if(r == 4)
             return MoveDirection.Down;
         return MoveDirection.None;
     }

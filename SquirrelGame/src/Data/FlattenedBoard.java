@@ -12,24 +12,6 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         size = new XY(b.getXsize(),b.getYsize());
     }
 
-    public EntityType getEntityType(Entity e){
-        if(e instanceof BadPlant)
-            return EntityType.BadPlant;
-        if(e instanceof BadBeast)
-            return EntityType.BadBeast;
-        if(e instanceof GoodBeast)
-            return EntityType.Goodbeast;
-        if(e instanceof GoodPlant)
-            return EntityType.GoodPlant;
-        if(e instanceof Wall)
-            return EntityType.Wall;
-        if(e instanceof MiniSquirrel)
-            return EntityType.MiniSquirrel;
-        if(e instanceof MasterSquirrel)
-            return EntityType.MasterSquirrel;
-        return EntityType.Air;
-    }
-
     public EntityType getEntityType(int x , int y){
         if(fb[x][y] instanceof BadBeast)
             return EntityType.BadBeast;
@@ -50,24 +32,52 @@ public class FlattenedBoard  implements BoardView, EntityContext{
     }
 
     public void tryToMove(MiniSquirrel miniSquirrel , XY direction){
-        if((miniSquirrel).stuned == 0){
-            miniSquirrel.place = new XY(direction.getX() , direction.getY());
+        if(getEntityType(miniSquirrel.place.getX()+direction.getX(),miniSquirrel.place.getY()+direction.getY()) == EntityType.Air && miniSquirrel.stuned == 0){
+            miniSquirrel.place = new XY(miniSquirrel.place.getX()+direction.getX(),miniSquirrel.place.getY()+direction.getY());
+        }else{
+            if(fb[miniSquirrel.place.getX()+direction.getX()][miniSquirrel.place.getY()+direction.getY()].collision(miniSquirrel)){}
+            else{
+                if(fb[miniSquirrel.place.getX()+direction.getX()][miniSquirrel.place.getY()+direction.getY()] instanceof MiniSquirrel){
+                    kill(miniSquirrel);
+                    kill(fb[miniSquirrel.place.getX()+direction.getX()][miniSquirrel.place.getY()+direction.getY()]);
+                }else{
+                    miniSquirrel.updateEnergy(fb[miniSquirrel.place.getX()+direction.getX()][miniSquirrel.place.getY()+direction.getY()].energy);
+                }
+            }
+            // pflanzen,bister fressen : wand stunned : master frisst
+            miniSquirrel.setStuned(miniSquirrel.stuned-1);
         }
-    }
+    } //collision müsste passen mit allen Entitys
 
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
-        if(masterSquirrel.stuned == 0){
-            masterSquirrel.place = new XY(direction.getX() , direction.getY());
+        if(getEntityType(masterSquirrel.place.getX()+direction.getX(),masterSquirrel.place.getY()+direction.getY()) == EntityType.Air && masterSquirrel.stuned == 0){
+            masterSquirrel.place = new XY(masterSquirrel.place.getX()+direction.getX(),masterSquirrel.place.getY()+direction.getY());
+        }else{
+            if(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].collision(masterSquirrel)){}
+            else {
+                masterSquirrel.updateEnergy(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].energy);
+            }
+            masterSquirrel.setStuned(masterSquirrel.stuned-1);
         }
-    }
+    } // collision müsste passen mit allen entitys
 
     public void tryToMove(BadBeast badBeast , XY direction){
-        badBeast.place = new XY(direction.getX() , direction.getY());
-    }
+        if(getEntityType(badBeast.place.getX()+direction.getX(),badBeast.place.getY()+direction.getY()) == EntityType.Air){
+            badBeast.place = new XY(badBeast.place.getX()+direction.getX(),badBeast.place.getY()+direction.getY());
+        }else {
+            if(fb[badBeast.place.getX()+direction.getX()][badBeast.place.getY()+direction.getY()] instanceof Squirrel){
+                badBeast.bite(fb[badBeast.place.getX()+direction.getX()][badBeast.place.getY()+direction.getY()]);
+            }
+        }
+    } // müste passen
 
     public void tryToMove(GoodBeast goodBeast , XY direction){
-        goodBeast.place = new XY(direction.getX() , direction.getY());
-    }
+        if(getEntityType(goodBeast.place.getX()+direction.getX(),goodBeast.place.getY()+direction.getY()) == EntityType.Air){
+            goodBeast.place = new XY(goodBeast.place.getX()+direction.getX(),goodBeast.place.getY()+direction.getY());
+        }
+    } // müsste passen
+
+    public Entity[][] getFB(){return fb;}
 
     @Override
     public void kill(Entity e) {
@@ -76,6 +86,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
     @Override
     public void killAndReplace(Entity e) {
+        b.killAndReplace(e);
+    }
+
+    public void updateBoard(){
+        fb = b.flattend();
     }
 
     public XY getSize(){return size;}

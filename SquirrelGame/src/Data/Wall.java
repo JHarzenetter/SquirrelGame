@@ -8,11 +8,10 @@ public class Wall extends Entity {
 
     public boolean collision(Entity e){
         if(e instanceof Squirrel) {
-            e.updateEnergy(this.energy);
             ((Squirrel) e).setStuned(3);
-            return true;
+            return false;
         }
-        return true;
+        return false;
     }
 
     public String toString(){

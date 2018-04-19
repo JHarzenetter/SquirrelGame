@@ -11,22 +11,28 @@ public class BadBeast extends Character {
 
     @Override
     public boolean collision(Entity e) {
-        if(e instanceof  Squirrel){
+        if(e instanceof Squirrel){
             bite(e);
-            if(bites == 7){
-                return false;
-            }
             return true;
         }
         return false;
     }
 
-    private void bite(Entity e){
+    public void bite(Entity e){
         e.updateEnergy(energy);
         bites++;
     }
 
     public String toString(){
         return ("Type: BadBeast " +super.toString());
+    }
+
+    public int getBites() {
+        return bites;
+    }
+
+    @Override
+    public void nextStep(EntityContext context) {
+
     }
 }
