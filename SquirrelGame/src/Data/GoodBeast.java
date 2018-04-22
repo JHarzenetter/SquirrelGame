@@ -1,11 +1,14 @@
 package Data;
 
 
-public class GoodBeast extends Character {
+public class GoodBeast extends Beast {
+
+    private int wait = 4;
 
 
     public GoodBeast(int pID, int x, int y) {
         super(pID,200, x,y);
+        eatable = true;
     }
 
     @Override
@@ -22,6 +25,11 @@ public class GoodBeast extends Character {
 
     @Override
     public void nextStep(EntityContext context) {
-        context.tryToMove(this, moveDirection.getDirection());
+        if(wait > 0){
+            wait --;
+        } else {
+            context.tryToMove(this, moveDirection.getDirection());
+            wait = 4;
+        }
     }
 }

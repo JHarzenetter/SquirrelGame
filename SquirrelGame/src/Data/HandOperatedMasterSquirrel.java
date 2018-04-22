@@ -25,6 +25,9 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel{
     @Override
     public void nextStep(EntityContext context) {
         context.tryToMove(this , moveDirection.getDirection());
+        if(energy < 0){
+            energy = 0;
+        }
         System.out.println("MasterS Engery : " + this.energy);
     }
 }

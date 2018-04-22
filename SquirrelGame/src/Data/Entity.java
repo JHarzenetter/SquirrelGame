@@ -5,11 +5,13 @@ public abstract class Entity {
     protected int ID;
     protected int energy;     // random spawn , flattend...?? --> was soll board beinhalten? , beast KI , interface use , stuned gute l�sung?
     protected XY place;
+    protected boolean eatable;
 
     Entity(int pID, int pEnergy , int x , int y){
         ID = pID;
         energy = pEnergy;
         place = new XY(x,y);
+        eatable = false;
     }
 
     public int getID(){
@@ -29,6 +31,10 @@ public abstract class Entity {
     public boolean equals(){return false;}
 
     public void nextStep(EntityContext context){}
+
+    public boolean isEatable() {
+        return eatable;
+    }
 
     public String toString(){
         return ("ID: "+ID+" , Energy: "+energy+" , X: "+place.getX()+" , Y: "+place.getY());

@@ -34,6 +34,15 @@ public class GameImpl extends Game {
                 if(fb.getEntityType(i,k) == EntityType.MasterSquirrel){
                     ((Character)fb.getFB()[i][k]).setMoveDirection(ui.getCommand());
                 }
+                if(fb.getEntityType(i,k) == EntityType.BadBeast){
+                    ((Character) fb.getFB()[i][k]).setMoveDirection(ui.getRandCommand());
+                }
+                if(fb.getEntityType(i,k) == EntityType.Goodbeast){
+                    ((Character) fb.getFB()[i][k]).setMoveDirection(ui.getRandCommand());
+                }
+                if(fb.getEntityType(i,k) == EntityType.MiniSquirrel){
+
+                }
             }
         }
     }

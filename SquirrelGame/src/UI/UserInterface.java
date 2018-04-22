@@ -8,6 +8,8 @@ public interface UserInterface {
 
     MoveDirection getCommand();
 
+    MoveDirection getRandCommand();
+
     int read();
 
 }

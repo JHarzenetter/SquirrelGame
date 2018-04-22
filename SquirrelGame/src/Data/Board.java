@@ -94,25 +94,25 @@ public class Board{
     }
 
     public void addEntity(Entity e, int x, int y){
-        Entity[] tboard = board;
-        board = new Entity[board.length+1];
-        for(int i=0; i<tboard.length; i++) {
+        Entity[] tboard = board.clone();
+        board = new Entity[tboard.length+1];
+        for(int i=0; i<tboard.length-1; i++) {
             board[i] = tboard[i];
         }
         if(e instanceof GoodPlant){
-            board[tboard.length] = new GoodPlant(id,x,y);
+            board[tboard.length-1] = new GoodPlant(id,x,y);
             id++;
         }
         if(e instanceof BadPlant){
-            board[tboard.length] = new BadPlant(id,x,y);
+            board[tboard.length-1] = new BadPlant(id,x,y);
             id++;
         }
         if(e instanceof GoodBeast){
-            board[tboard.length] = new GoodBeast(id,x,y);
+            board[tboard.length-1] = new GoodBeast(id,x,y);
             id++;
         }
         if(e instanceof BadBeast){
-            board[tboard.length] = new BadBeast(id,x,y);
+            board[tboard.length-1] = new BadBeast(id,x,y);
             id++;
         }
     }

@@ -50,25 +50,45 @@ public class FlattenedBoard  implements BoardView, EntityContext{
     } //collision müsste passen mit allen Entitys
 
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
-        if(getEntityType(masterSquirrel.place.getX()+direction.getX(),masterSquirrel.place.getY()+direction.getY()) == EntityType.Air && masterSquirrel.stuned == 0){
-            masterSquirrel.place = new XY(masterSquirrel.place.getX()+direction.getX(),masterSquirrel.place.getY()+direction.getY());
+        int Xtry = masterSquirrel.place.getX()+direction.getX();
+        int Ytry = masterSquirrel.place.getY()+direction.getY();
+
+        if(getEntityType(Xtry,Ytry) == EntityType.Air && masterSquirrel.stuned == 0){
+            masterSquirrel.place = new XY(Xtry,Ytry);
         }else{
             if(masterSquirrel.stuned > 0){
                 System.out.println("Stunned for " + masterSquirrel.stuned +" rounds");
                 masterSquirrel.setStuned(masterSquirrel.stuned-1);
-            }else if(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].collision(masterSquirrel)){}
+            }else if(fb[Xtry][Ytry].collision(masterSquirrel)){}
+            else if(fb[Xtry][Ytry].isEatable()){
+                masterSquirrel.updateEnergy(fb[Xtry][Ytry].energy);
+                killAndReplace(fb[Xtry][Ytry]);
+                masterSquirrel.place = new XY(Xtry,Ytry);
+            }
             else {
-                masterSquirrel.updateEnergy(fb[masterSquirrel.place.getX()+direction.getX()][masterSquirrel.place.getY()+direction.getY()].energy);
+                masterSquirrel.updateEnergy(fb[Xtry][Ytry].energy);
             }
         }
     } // collision müsste passen mit allen entitys
 
     public void tryToMove(BadBeast badBeast , XY direction){
-        if(getEntityType(badBeast.place.getX()+direction.getX(),badBeast.place.getY()+direction.getY()) == EntityType.Air){
-            badBeast.place = new XY(badBeast.place.getX()+direction.getX(),badBeast.place.getY()+direction.getY());
+        int Xtry = badBeast.place.getX()+direction.getX();
+        int Ytry = badBeast.place.getY()+direction.getY();
+
+        if(badBeast.isSquirrelNear(badBeast , this)){
+            // direction = ;    set direction to squirrel
+            System.out.println("Squirrel spotted!");
+        }
+
+        if(getEntityType(Xtry,Ytry) == EntityType.Air){
+            badBeast.place = new XY(Xtry,Ytry);
         }else {
-            if(fb[badBeast.place.getX()+direction.getX()][badBeast.place.getY()+direction.getY()] instanceof Squirrel){
-                badBeast.bite(fb[badBeast.place.getX()+direction.getX()][badBeast.place.getY()+direction.getY()]);
+            if(badBeast.getBites() < 7){
+                if(fb[Xtry][Ytry] instanceof Squirrel){
+                    badBeast.bite(fb[Xtry][Ytry]);
+                }
+            } else {
+                killAndReplace(badBeast);
             }
         }
     } // müste passen

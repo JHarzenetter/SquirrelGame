@@ -1,7 +1,7 @@
 package Data;
 
 
-public class BadBeast extends Character {
+public class BadBeast extends Beast {
 
     private int bites = 0;
 
@@ -33,6 +33,6 @@ public class BadBeast extends Character {
 
     @Override
     public void nextStep(EntityContext context) {
-
+        context.tryToMove(this, moveDirection.getDirection());
     }
 }
