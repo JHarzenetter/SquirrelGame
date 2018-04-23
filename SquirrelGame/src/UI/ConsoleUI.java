@@ -9,9 +9,9 @@ public class ConsoleUI implements UserInterface{
 
     public void render(BoardView view){
         String s = "";
-        for(int i = 0; i< view.getSize().getX(); i++){
-            for(int k = 0; k< view.getSize().getY(); k++){
-                s += view.getEntityType(i,k).getWert();
+        for(int i = 0; i< view.getSize().getY(); i++){
+            for(int k = 0; k< view.getSize().getX(); k++){
+                s += view.getEntityType(k,i).getWert();
             }
             s= s + "\n";
         }
