@@ -21,8 +21,6 @@ public class State {
     public Board getB(){return b;}
 
     public void update(){
-        for (int i=0; i<b.getBoard().length-1;i++){
-            b.getBoard()[i].nextStep(flattenedBoard());
-        }
+        b.update(flattenedBoard());
     }
 }

@@ -133,4 +133,10 @@ public class Board{
     public int getYsize(){
         return bc.getHeight();
     }
+
+    public void update(EntityContext context) {
+        for(int i=0; i<board.length; i++){
+            board[i].nextStep(context);
+        }
+    }
 }
