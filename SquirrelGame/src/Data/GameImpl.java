@@ -18,8 +18,8 @@ public class GameImpl extends Game {
 
     @Override
     protected void update() {
-        fb.updateBoard();
         state.update();
+        fb.updateBoard();
         bv=fb;
     }
 

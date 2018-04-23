@@ -1,7 +1,5 @@
 package Data;
 
-import java.sql.SQLOutput;
-
 public abstract class Beast extends Character{
     Beast(int pID, int pEnergy, int x, int y) {
         super(pID, pEnergy, x, y);
@@ -11,32 +9,24 @@ public abstract class Beast extends Character{
 
     public boolean isSquirrelNear(Entity e, FlattenedBoard f) {  //insert badBeast KI!
         int step = 1;
+
         while(step <= 6) {
-            int tx = e.place.getX();
-            int ty = e.place.getY()-1;
+            int tx = e.place.getX()-1;
+            int ty = e.place.getY();
 
             //start 1 links neben entity
-            // dann nach oben , dann nach recht , dann nach unten , dann nach links , dann nach oben bis startpunkt erreicht
+            //dann nach oben , dann nach recht , dann nach unten , dann nach links , dann nach oben bis startpunkt erreicht
 
-            while (tx != e.place.getX() - step) {
-                tx--;
-                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
+            while (ty != e.place.getY() - step) {
+                ty--;
+                if(ty < f.getSize().getY() && tx <f.getSize().getX()){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
                         return true;
                     }
                 }
             }
-            while (ty != e.place.getY() + step) { // nach rechts
-                ty++;
-                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
-                    if (f.getFB()[tx][ty] instanceof Squirrel) {
-                        nearestSquirrel = f.getFB()[tx][ty].place;
-                        return true;
-                    }
-                }
-            }
-            while (tx != e.place.getX() + step) { // nach unten
+            while (tx != e.place.getX() + step) { // nach rechts
                 tx++;
                 if(tx < f.getSize().getX() && ty <f.getSize().getY()){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
@@ -45,8 +35,8 @@ public abstract class Beast extends Character{
                     }
                 }
             }
-            while (ty != e.place.getY() - step) { // nach links
-                ty--;
+            while (ty != e.place.getY() + step) { // nach unten
+                ty++;
                 if(tx < f.getSize().getX() && ty <f.getSize().getY()){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
@@ -54,8 +44,17 @@ public abstract class Beast extends Character{
                     }
                 }
             }
-            while (tx != e.place.getX()) { // nach oben
+            while (tx != e.place.getX() - step) { // nach links
                 tx--;
+                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
+                    if (f.getFB()[tx][ty] instanceof Squirrel) {
+                        nearestSquirrel = f.getFB()[tx][ty].place;
+                        return true;
+                    }
+                }
+            }
+            while (ty != e.place.getY()) { // nach oben
+                ty--;
                 if(tx < f.getSize().getX() && ty <f.getSize().getY()){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;

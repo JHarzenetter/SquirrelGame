@@ -131,7 +131,7 @@ public class Board{
     }
 
     public void update(EntityContext context) {
-        for(int i=0; i<board.length; i++){
+        for(int i=0; i<board.length-1; i++){
             board[i].nextStep(context);
         }
     }
