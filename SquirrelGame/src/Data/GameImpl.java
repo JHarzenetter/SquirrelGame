@@ -21,7 +21,6 @@ public class GameImpl extends Game {
         state.update();
         fb.updateBoard();
         bv=fb;
-        System.out.println(""+ui.render(bv));
     }
 
     public void render(){

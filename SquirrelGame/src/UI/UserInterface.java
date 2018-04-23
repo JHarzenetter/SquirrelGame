@@ -4,7 +4,7 @@ import Data.BoardView;
 
 public interface UserInterface {
 
-    String render(BoardView view);
+    void render(BoardView view);
 
     MoveDirection getCommand();
 

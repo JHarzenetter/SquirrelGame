@@ -11,7 +11,7 @@ public abstract class Game{
     }
 
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         UserInterface ui;
         ConsoleUI cui = new ConsoleUI();
         State s = new State(new Board());
@@ -20,7 +20,7 @@ public abstract class Game{
 
         System.out.println(""+cui.render(fb));
         g.run();
-    }
+    }*/
 
     public void run(){
         while(true){

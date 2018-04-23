@@ -75,10 +75,10 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         int Xtry = badBeast.place.getX()+direction.getX();
         int Ytry = badBeast.place.getY()+direction.getY();
 
-        if(badBeast.isSquirrelNear(badBeast , this)){
+        /*if(badBeast.isSquirrelNear(badBeast , this)){
             // direction = ;    set direction to squirrel
             System.out.println("Squirrel spotted!");
-        }
+        }*/
 
         if(getEntityType(Xtry,Ytry) == EntityType.Air){
             badBeast.place = new XY(Xtry,Ytry);

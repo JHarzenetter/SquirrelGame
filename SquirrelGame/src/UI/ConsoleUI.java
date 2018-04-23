@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ConsoleUI implements UserInterface{
 
-    public String render(BoardView view){
+    public void render(BoardView view){
         String s = "";
         for(int i = 0; i< view.getSize().getX(); i++){
             for(int k = 0; k< view.getSize().getY(); k++){
@@ -15,7 +15,7 @@ public class ConsoleUI implements UserInterface{
             }
             s= s + "\n";
         }
-        return s;
+        System.out.println("" + s);
     }
 
     public int read(){  //read playerinput
