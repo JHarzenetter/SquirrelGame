@@ -122,10 +122,6 @@ public class Board{
         addEntity(e,rand.nextInt((bc.getLength()-2))+1, rand.nextInt((bc.getHeight()-2))+1);
     }
 
-    public Entity[] getBoard() {
-        return board;
-    }
-
     public int getXsize(){
         return bc.getLength();
     }
