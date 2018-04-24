@@ -5,7 +5,7 @@ public abstract class Beast extends Character{
         super(pID, pEnergy, x, y);
     }
 
-   XY nearestSquirrel;
+    private XY nearestSquirrel;
 
     public boolean isSquirrelNear(Entity e, FlattenedBoard f) {  //insert badBeast KI!
         int step = 1;
@@ -13,9 +13,6 @@ public abstract class Beast extends Character{
         while(step <= 6) {
             int tx = e.place.getX()-1;
             int ty = e.place.getY();
-
-            //start 1 links neben entity
-            //dann nach oben , dann nach recht , dann nach unten , dann nach links , dann nach oben bis startpunkt erreicht
 
             while (ty != e.place.getY() - step) {
                 ty--;

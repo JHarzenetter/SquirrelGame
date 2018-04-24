@@ -8,6 +8,7 @@ public class MiniSquirrel extends Squirrel{
     public MiniSquirrel(int ID, int energy, int x, int y, int MsID) {
         super(ID, energy ,x, y);
         this.MsID = MsID;
+        eatable = true;
     }
 
     public int getMasterID(){
@@ -22,11 +23,9 @@ public class MiniSquirrel extends Squirrel{
     public boolean collision(Entity e) {
         if(e instanceof MasterSquirrel){
             if(e.getID() == MsID){
-                updateEnergy((-energy));
                 return false;
             }
             if(e.getID() != MsID) {
-                updateEnergy((-energy));
                 return false;
             }
         }
