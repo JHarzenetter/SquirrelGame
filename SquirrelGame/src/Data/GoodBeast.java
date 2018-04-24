@@ -1,10 +1,6 @@
 package Data;
 
-
-public class GoodBeast extends Beast {
-
-    private int wait = 0;
-
+public class GoodBeast extends Character {
 
     public GoodBeast(int pID, int x, int y) {
         super(pID,200, x,y);
@@ -25,11 +21,11 @@ public class GoodBeast extends Beast {
 
     @Override
     public void nextStep(EntityContext context) {
-        if(wait > 0){
-            wait --;
+        if(getWait() > 0){
+            setWait(getWait()-1);
         } else {
-            context.tryToMove(this, moveDirection.getDirection());
-            wait = 4;
+            context.tryToMove(this, getMD().getDirection());
+            setWait(4);
         }
     }
 }

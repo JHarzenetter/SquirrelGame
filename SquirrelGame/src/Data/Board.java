@@ -3,7 +3,7 @@ package Data;
 import java.util.Random;
 
 public class Board{
-
+// TODO bc als parameter für den board-constructor
     private BoardConfig bc = new BoardConfig();
     private Entity[] board = new Entity[bc.getAmoutnOfEntiies()];
     private XY[] xy;
@@ -33,9 +33,9 @@ public class Board{
             id++;
         }
 
-        for(int i=0; i<bc.getLength(); i++){
-            for(int k=0; k<bc.getHeight(); k++){
-                if(i >=1 && k>=1 && i<bc.getLength()-1 && k<bc.getHeight()-1){
+        for(int i=0; i<bc.getSize().getX(); i++){
+            for(int k=0; k<bc.getSize().getY(); k++){
+                if(i >=1 && k>=1 && i<bc.getSize().getX()-1 && k<bc.getSize().getY()-1){
                 }
                 else {
                     board[id] = new Wall(id,i,k);
@@ -55,8 +55,8 @@ public class Board{
 
         while(randxy[bc.getAmoutnOfEntiies()-1] == null){
             check = true;
-            int k = rand.nextInt((bc.getLength()-2))+1;
-            int i = rand.nextInt((bc.getHeight()-2))+1;
+            int k = rand.nextInt((bc.getSize().getX()-2))+1;
+            int i = rand.nextInt((bc.getSize().getY()-2))+1;
 
             for(int j=0; j<count; j++){
                 if(randxy[j].getX() == k && randxy[j].getY() == i){
@@ -72,19 +72,28 @@ public class Board{
         return randxy;
     }
 
-    public Entity[][] flattend(){
-        Entity[][] flattendBoard = new Entity[bc.getLength()][bc.getHeight()];
+    public FlattenedBoard flattend(){
+        Entity[][] flattendBoard = new Entity[bc.getSize().getX()][bc.getSize().getY()];
         for(int i=0; i<board.length-1; i++){
-            flattendBoard[board[i].place.getX()][board[i].place.getY()] = board[i];
+            flattendBoard[board[i].getPlace().getX()][board[i].getPlace().getY()] = board[i];
         }
-        return flattendBoard;
+        return new FlattenedBoard(flattendBoard);
+    }
+
+    public HandOperatedMasterSquirrel getPlayer(){
+        for(int i=0; i<board.length-1; i++){
+            if (board[i] instanceof HandOperatedMasterSquirrel){
+                return (HandOperatedMasterSquirrel)board[i];
+            }
+        }
+        return null;
     }
 
     public void removeEntity(Entity e){
         Entity[] tboard = new Entity[board.length-1];
         int k = 0;
         for(int i=0; i<board.length-1 ; i++){
-            if(e.place == board[i].place) {
+            if(e.getPlace() == board[i].getPlace()) {
                 k = 1;
             } else {
                 tboard[i-k] = board[i];
@@ -119,21 +128,17 @@ public class Board{
 
     public void killAndReplace(Entity e) {
         removeEntity(e);
-        addEntity(e,rand.nextInt((bc.getLength()-2))+1, rand.nextInt((bc.getHeight()-2))+1);
+        addEntity(e,rand.nextInt((bc.getSize().getX()-2))+1, rand.nextInt((bc.getSize().getY()-2))+1);
     }
 
-    public int getXsize(){
-        return bc.getLength();
+    public XY getXy() {
+        return bc.getSize();
     }
 
-    public int getYsize(){
-        return bc.getHeight();
-    }
-
-    public void update(EntityContext context) {
+    public void update() {
         for(int i=0; i<board.length-1; i++){
             if(board[i] instanceof Character)
-                board[i].nextStep(context);
+                board[i].nextStep(flattend());
         }
     }
 }

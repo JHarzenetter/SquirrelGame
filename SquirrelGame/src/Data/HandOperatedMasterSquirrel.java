@@ -6,28 +6,12 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel{
         super(ID, x, y);
     }
 
-    public XY moveUp(){
-        return new XY(place.getX(),place.getY() - 1);
-    }
-
-    public XY moveDown(){
-        return new XY(place.getX(),place.getY() + 1);
-    }
-
-    public XY moveLeft(){
-        return new XY(place.getX()-1,place.getY());
-    }
-
-    public XY moveRight(){
-        return new XY(place.getX()+1, place.getY());
-    }
-
     @Override
     public void nextStep(EntityContext context) {
-        context.tryToMove(this , moveDirection.getDirection());
-        if(energy < 0){
-            energy = 0;
+        context.tryToMove(this , getMD().getDirection());
+        if(getEnergy() < 0){
+            updateEnergy(-getEnergy());
         }
-        System.out.println("MasterS Engery : " + this.energy);
+        System.out.println("MasterS Engery : " + this.getEnergy());
     }
 }

@@ -2,6 +2,6 @@ package Data;
 
 public interface BoardView {
 
-    EntityType getEntityType(int x , int y);
+    EntityType getEntityType(XY xy);
     XY getSize();
 }

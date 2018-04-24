@@ -1,6 +1,5 @@
 package Data;
 
-
 public class BadPlant extends Entity {
 
     public BadPlant(int pID, int x, int y) {

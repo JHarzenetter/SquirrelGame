@@ -1,8 +1,8 @@
 package UI;
 
 import Data.BoardView;
+import Data.XY;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleUI implements UserInterface{
@@ -11,7 +11,7 @@ public class ConsoleUI implements UserInterface{
         String s = "";
         for(int i = 0; i< view.getSize().getY(); i++){
             for(int k = 0; k< view.getSize().getX(); k++){
-                s += view.getEntityType(k,i).getWert();
+                s += view.getEntityType(new XY(k,i)).getWert();
             }
             s= s + "\n";
         }
@@ -44,31 +44,5 @@ public class ConsoleUI implements UserInterface{
         if(r == 4)
             return MoveDirection.Down;
         return MoveDirection.None;
-    }
-
-    @Override
-    public MoveDirection getRandCommand() {
-        int r = new Random().nextInt(8);
-
-        switch (r){
-            case 0:
-                return MoveDirection.Up;
-            case 1:
-                return MoveDirection.UpRight;
-            case 2:
-                return MoveDirection.Right;
-            case 3:
-                return MoveDirection.DownRight;
-            case 4:
-                return MoveDirection.Down;
-            case 5:
-                return MoveDirection.DownLeft;
-            case 6:
-                return MoveDirection.Left;
-            case 7:
-                return MoveDirection.UpLeft;
-            default:
-                return MoveDirection.None;
-        }
     }
 }

@@ -5,46 +5,27 @@ import UI.UserInterface;
 
 public class GameImpl extends Game {
 
-    private BoardView bv;
     private UserInterface ui;
     private FlattenedBoard fb;
+    private HandOperatedMasterSquirrel player;
 
-    public GameImpl(State state) {
+    public GameImpl(State state , Board b) {
         super(state);
-        fb = new FlattenedBoard(state.getB());
         ui = new ConsoleUI();
-        bv = fb;
+        player = b.getPlayer();
     }
 
     @Override
     protected void update() {
         state.update();
-        fb.updateBoard();
-        bv=fb;
     }
 
     public void render(){
-        ui.render(bv);
+        ui.render(state.flattenedBoard());
+        fb = state.flattenedBoard();
     }
 
     public void processInput(){
-        for(int i=0; i<fb.getSize().getX(); i++){
-            for(int k=0; k<fb.getSize().getY(); k++){
-                if(fb.getEntityType(i,k) == EntityType.MasterSquirrel){
-                    ((Character)fb.getFB()[i][k]).setMoveDirection(ui.getCommand());
-                }
-                if(fb.getEntityType(i,k) == EntityType.MiniSquirrel){
-
-                }
-                if(fb.getEntityType(i,k) == EntityType.BadBeast){
-                    ((Character) fb.getFB()[i][k]).setMoveDirection(ui.getRandCommand());
-                }
-                if(fb.getEntityType(i,k) == EntityType.Goodbeast){
-                    ((Character) fb.getFB()[i][k]).setMoveDirection(ui.getRandCommand());
-                }
-            }
-        }
+       player.setMoveDirection(ui.getCommand());
     }
-
-
 }

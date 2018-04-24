@@ -15,12 +15,10 @@ public class State {
     }
 
     public FlattenedBoard flattenedBoard(){
-        return new FlattenedBoard(b);
+        return b.flattend();
     }
 
-    public Board getB(){return b;}
-
     public void update(){
-        b.update(flattenedBoard());
+        b.update();
     }
 }

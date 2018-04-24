@@ -8,7 +8,7 @@ public class Wall extends Entity {
 
     public boolean collision(Entity e){
         if(e instanceof Squirrel) {
-            ((Squirrel) e).setStuned(3);
+            ((Squirrel) e).setWait(3);
             return false;
         }
         return false;

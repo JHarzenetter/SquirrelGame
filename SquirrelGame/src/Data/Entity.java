@@ -2,9 +2,9 @@ package Data;
 
 public abstract class Entity {
 
-    protected int ID;
-    protected int energy;     // random spawn , flattend...?? --> was soll board beinhalten? , beast KI , interface use , stuned gute l�sung?
-    protected XY place;
+    private int ID;
+    private int energy;     // TODO - kapselung attribute
+    private XY place;
     protected boolean eatable;
 
     Entity(int pID, int pEnergy , int x , int y){
@@ -22,13 +22,17 @@ public abstract class Entity {
         return energy;
     }
 
+    public XY getPlace(){return place;}
+
+    public void setPlace(XY b){
+        place = b;
+    }
+
     public void updateEnergy(int delta){
         energy = energy + delta;
     }
 
     public boolean collision(Entity e){return false;}
-
-    public boolean equals(){return false;}
 
     public void nextStep(EntityContext context){}
 

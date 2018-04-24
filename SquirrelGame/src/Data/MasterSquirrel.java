@@ -8,7 +8,7 @@ public abstract class MasterSquirrel extends Squirrel {
 
     public MiniSquirrel createMini(int miniID, int energy){
 
-        MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, place.getX()+1, place.getY(), this.ID); //sp�ter noch �ndern
+        MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, getPlace().getX()+1, getPlace().getY(), this.getID()); //sp�ter noch �ndern
 
         return mini;
     }
@@ -24,7 +24,7 @@ public abstract class MasterSquirrel extends Squirrel {
     @Override
     public boolean collision(Entity e) {
         if(e instanceof MiniSquirrel){
-            if(((MiniSquirrel) e).getMasterID() != ID){
+            if(((MiniSquirrel) e).getMasterID() != getID()){
                 e.updateEnergy(150);
                 return true;
             }

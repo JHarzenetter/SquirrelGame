@@ -4,6 +4,7 @@ public class BoardConfig{
 
     private int length = 30;
     private int height = 20;
+    private XY size = new XY(length,height);
     private int amountOfBadBeast = 4;
     private int amountOfGoodBeast = 4;
     private int amountOfBadPlant = 4;
@@ -12,8 +13,7 @@ public class BoardConfig{
 
     //21 + 40 +40 + 49 +49 = 199
 
-    public int getLength(){return length;}
-    public int getHeight(){return height;}
+    public XY getSize(){return size;}
     public int getAmountOfBadBeast(){return amountOfBadBeast;}
     public int getAmountOfGoodBeast(){return amountOfGoodBeast;}
     public int getAmountOfBadPlant(){return amountOfBadPlant;}

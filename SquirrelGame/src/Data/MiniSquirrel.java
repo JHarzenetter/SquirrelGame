@@ -15,9 +15,7 @@ public class MiniSquirrel extends Squirrel{
         return MsID;
     }
 
-    public void nextStep(){
-        energy--;
-    }
+    public void nextStep(){}
 
     @Override
     public boolean collision(Entity e) {
