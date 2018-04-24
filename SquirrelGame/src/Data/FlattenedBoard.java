@@ -70,7 +70,9 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             if(masterSquirrel.stuned > 0){
                 System.out.println("Stunned for " + masterSquirrel.stuned +" rounds");
                 masterSquirrel.setStuned(masterSquirrel.stuned-1);
-            }else if(fb[Xtry][Ytry].collision(masterSquirrel)){}
+            }else if(fb[Xtry][Ytry].collision(masterSquirrel)){
+
+            }
             else if(fb[Xtry][Ytry].isEatable()){
                 masterSquirrel.updateEnergy(fb[Xtry][Ytry].energy);
                 if(fb[Xtry][Ytry] instanceof MiniSquirrel){
@@ -98,6 +100,10 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
         if(getEntityType(Xtry,Ytry) == EntityType.Air){
             badBeast.place = new XY(Xtry,Ytry);
+        } else {
+            if(getEntityType(Xtry,Ytry) == EntityType.MasterSquirrel){
+                badBeast.bite(fb[Xtry][Ytry]);
+            }
         }
     } //passt
 
