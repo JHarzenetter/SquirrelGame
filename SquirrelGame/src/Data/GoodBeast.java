@@ -3,7 +3,7 @@ package Data;
 
 public class GoodBeast extends Beast {
 
-    private int wait = 4;
+    private int wait = 0;
 
 
     public GoodBeast(int pID, int x, int y) {

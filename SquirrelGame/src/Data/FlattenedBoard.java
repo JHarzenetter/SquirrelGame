@@ -72,32 +72,69 @@ public class FlattenedBoard  implements BoardView, EntityContext{
     } // collision müsste passen mit allen entitys
 
     public void tryToMove(BadBeast badBeast , XY direction){
+
+        if(badBeast.isSquirrelNear(badBeast , this)){
+            direction = moveToSquirrel(badBeast,badBeast.nearestSquirrel) ;    //set direction to squirrel
+            System.out.println("Squirrel spotted!");
+        }
+
         int Xtry = badBeast.place.getX()+direction.getX();
         int Ytry = badBeast.place.getY()+direction.getY();
 
-        /*if(badBeast.isSquirrelNear(badBeast , this)){
-            // direction = ;    set direction to squirrel
-            System.out.println("Squirrel spotted!");
-        }*/
-
         if(getEntityType(Xtry,Ytry) == EntityType.Air){
             badBeast.place = new XY(Xtry,Ytry);
-        }else {
-            if(badBeast.getBites() < 7){
-                if(fb[Xtry][Ytry] instanceof Squirrel){
-                    badBeast.bite(fb[Xtry][Ytry]);
-                }
-            } else {
-                killAndReplace(badBeast);
-            }
         }
     } // müste passen
 
     public void tryToMove(GoodBeast goodBeast , XY direction){
-        if(getEntityType(goodBeast.place.getX()+direction.getX(),goodBeast.place.getY()+direction.getY()) == EntityType.Air){
-            goodBeast.place = new XY(goodBeast.place.getX()+direction.getX(),goodBeast.place.getY()+direction.getY());
+        if(goodBeast.isSquirrelNear(goodBeast , this)){
+            direction = moveAwayFromSquirrel(goodBeast ,goodBeast.nearestSquirrel) ;    //set direction to squirrel
+            System.out.println("Squirrel spotted!");
+        }
+
+        int Xtry = goodBeast.place.getX()+direction.getX();
+        int Ytry = goodBeast.place.getY()+direction.getY();
+
+        if(getEntityType(Xtry,Ytry) == EntityType.Air){
+            goodBeast.place = new XY(Xtry,Ytry);
         }
     } // müsste passen
+
+    private XY moveToSquirrel(BadBeast badBeast, XY nearestSquirrel) {
+        int x = 0;
+        int y = 0;
+        if(badBeast.place.getX() < nearestSquirrel.getX()){
+            x = 1;
+        }
+        if(badBeast.place.getY() < nearestSquirrel.getY()){
+            y = 1;
+        }
+        if(badBeast.place.getX() > nearestSquirrel.getX()){
+            x = -1;
+        }
+        if(badBeast.place.getY() > nearestSquirrel.getY()){
+            y = -1;
+        }
+        return new XY(x,y);
+    }
+
+    private XY moveAwayFromSquirrel(GoodBeast goodBeast , XY nearestSquirrel){
+        int x = 0;
+        int y = 0;
+        if(goodBeast.place.getX() < nearestSquirrel.getX()){
+            x = -1;
+        }
+        if(goodBeast.place.getX() > nearestSquirrel.getX()){
+            x = 1;
+        }
+        if(goodBeast.place.getY() < nearestSquirrel.getY()){
+            y = -1;
+        }
+        if(goodBeast.place.getY() > nearestSquirrel.getY()){
+            y = 1;
+        }
+        return new XY(x,y);
+    }
 
     public Entity[][] getFB(){return fb;}
 

@@ -3,10 +3,13 @@ package Data;
 
 public class BadBeast extends Beast {
 
-    private int bites = 0;
+    private int bites;
+    private int wait;
 
     public BadBeast(int pID, int x, int y) {
         super(pID, -150, x, y);
+        bites = 0;
+        wait = 0;
     }
 
     @Override
@@ -21,6 +24,7 @@ public class BadBeast extends Beast {
     public void bite(Entity e){
         e.updateEnergy(energy);
         bites++;
+        System.out.println("bites = " +bites);
     }
 
     public String toString(){
@@ -33,6 +37,14 @@ public class BadBeast extends Beast {
 
     @Override
     public void nextStep(EntityContext context) {
-        context.tryToMove(this, moveDirection.getDirection());
+        if(bites == 7){
+            context.killAndReplace(this);
+        } else if(wait > 0){
+            wait--;
+        }
+        else {
+            context.tryToMove(this, moveDirection.getDirection());
+            wait = 4;
+        }
     }
 }

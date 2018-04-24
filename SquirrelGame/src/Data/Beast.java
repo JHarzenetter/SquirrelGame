@@ -19,7 +19,7 @@ public abstract class Beast extends Character{
 
             while (ty != e.place.getY() - step) {
                 ty--;
-                if(ty < f.getSize().getY() && tx <f.getSize().getX()){
+                if(ty < f.getSize().getY() && ty > 0 && tx < f.getSize().getX() && tx > 0){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
                         return true;
@@ -28,7 +28,7 @@ public abstract class Beast extends Character{
             }
             while (tx != e.place.getX() + step) { // nach rechts
                 tx++;
-                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
+                if(ty < f.getSize().getY() && ty > 0 && tx < f.getSize().getX() && tx > 0){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
                         return true;
@@ -37,7 +37,7 @@ public abstract class Beast extends Character{
             }
             while (ty != e.place.getY() + step) { // nach unten
                 ty++;
-                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
+                if(ty < f.getSize().getY() && ty > 0 && tx < f.getSize().getX() && tx > 0){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
                         return true;
@@ -46,7 +46,7 @@ public abstract class Beast extends Character{
             }
             while (tx != e.place.getX() - step) { // nach links
                 tx--;
-                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
+                if(ty < f.getSize().getY() && ty > 0 && tx < f.getSize().getX() && tx > 0){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
                         return true;
@@ -55,7 +55,7 @@ public abstract class Beast extends Character{
             }
             while (ty != e.place.getY()) { // nach oben
                 ty--;
-                if(tx < f.getSize().getX() && ty <f.getSize().getY()){
+                if(ty < f.getSize().getY() && ty > 0 && tx < f.getSize().getX() && tx > 0){
                     if (f.getFB()[tx][ty] instanceof Squirrel) {
                         nearestSquirrel = f.getFB()[tx][ty].place;
                         return true;
