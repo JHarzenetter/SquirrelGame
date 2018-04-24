@@ -58,7 +58,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 miniSquirrel.updateEnergy(fb[xTry][yTry].energy);
             }
         }
-    } //passt
+    } //collision ok
 
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
         int Xtry = masterSquirrel.place.getX()+direction.getX();
@@ -86,7 +86,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 masterSquirrel.updateEnergy(fb[Xtry][Ytry].energy);
             }
         }
-    } //passt
+    } //collision ok
 
     public void tryToMove(BadBeast badBeast , XY direction){
 
@@ -105,7 +105,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 badBeast.bite(fb[Xtry][Ytry]);
             }
         }
-    } //passt
+    } //collision ok
 
     public void tryToMove(GoodBeast goodBeast , XY direction){
         if(goodBeast.isSquirrelNear(goodBeast , this)){
@@ -119,7 +119,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         if(getEntityType(Xtry,Ytry) == EntityType.Air){
             goodBeast.place = new XY(Xtry,Ytry);
         }
-    } //passt
+    } //collision ok
 
     private XY moveToSquirrel(BadBeast beast, XY nearestSquirrel) {
         int x = 0;
@@ -185,5 +185,4 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         }
         return s;
     }
-
 }
