@@ -132,7 +132,8 @@ public class Board{
 
     public void update(EntityContext context) {
         for(int i=0; i<board.length-1; i++){
-            board[i].nextStep(context);
+            if(board[i] instanceof Character)
+                board[i].nextStep(context);
         }
     }
 }
