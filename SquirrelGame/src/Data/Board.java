@@ -5,7 +5,6 @@ import java.util.Random;
 public class Board{
 
     private Entity[] board;
-    private XY[] xy;
     private XY size;
     Random rand = new Random();
     private int id=0;
@@ -13,7 +12,7 @@ public class Board{
     public Board(BoardConfig bc){
         board = new Entity[bc.getAmoutnOfEntiies()];
         size = new XY(bc.getLength(),bc.getHeight());
-        xy = getRandXY(bc);
+        XY [] xy = getRandXY(bc);
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
             board[id] = new BadBeast(id,xy[id].getX(),xy[id].getY());
             id++;
