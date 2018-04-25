@@ -15,7 +15,7 @@ public class State {
     }
 
     public FlattenedBoard flattenedBoard(){
-        return b.flattend();
+        return b.flattened();
     }
 
     public void update(){

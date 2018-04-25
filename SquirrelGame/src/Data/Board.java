@@ -74,7 +74,7 @@ public class Board{
         return randXY;
     }
 
-    public FlattenedBoard flattend(){
+    public FlattenedBoard flattened(){
         Entity[][] flattendBoard = new Entity[size.getX()][size.getY()];
         for(int i=0; i<board.length-1; i++){
             flattendBoard[board[i].getPlace().getX()][board[i].getPlace().getY()] = board[i];
@@ -140,7 +140,7 @@ public class Board{
     public void update() {
         for(int i=0; i<board.length-1; i++){
             if(board[i] instanceof Character){
-                board[i].nextStep(flattend());
+                board[i].nextStep(flattened());
             }
         }
     }
