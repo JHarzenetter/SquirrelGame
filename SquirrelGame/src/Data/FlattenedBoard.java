@@ -11,7 +11,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
     public FlattenedBoard(Entity[][] fb, Board b) {
         this.fb = fb;
         this.b = b;
-        size = b.getXy();
+        size = b.getSize();
     }
 
     public EntityType getEntityType(XY xy){
