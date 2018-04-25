@@ -3,7 +3,7 @@ package Data;
 import java.util.Random;
 
 public class Board{
-// TODO bc als parameter für den board-constructor
+// TODO bc als parameter für den board-constructor --> abgeglichen mit andi und nicht nötig (abnahme Meixner persönlich)
     private BoardConfig bc = new BoardConfig();
     private Entity[] board = new Entity[bc.getAmoutnOfEntiies()];
     private XY[] xy;
@@ -77,7 +77,7 @@ public class Board{
         for(int i=0; i<board.length-1; i++){
             flattendBoard[board[i].getPlace().getX()][board[i].getPlace().getY()] = board[i];
         }
-        return new FlattenedBoard(flattendBoard);
+        return new FlattenedBoard(flattendBoard,this);
     }
 
     public HandOperatedMasterSquirrel getPlayer(){
@@ -137,8 +137,10 @@ public class Board{
 
     public void update() {
         for(int i=0; i<board.length-1; i++){
-            if(board[i] instanceof Character)
+            if(board[i] instanceof Character){
                 board[i].nextStep(flattend());
+                System.out.println(""+board[i].toString());
+            }
         }
     }
 }

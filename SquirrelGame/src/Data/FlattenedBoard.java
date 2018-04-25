@@ -8,12 +8,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
     private Entity[][] fb;
     private XY size;
 
-    public FlattenedBoard(Entity[][] b) {
-        fb = b;
-        size = new XY(b[0].length,b[1].length);
+    public FlattenedBoard(Entity[][] fb, Board b) {
+        this.fb = fb;
+        this.b = b;
+        size = b.getXy();
     }
-
-    //TODO other beast movement , render not working properly , killandreplace , stunned , kill beast when 7 bites
 
     public EntityType getEntityType(XY xy){
         if(fb[xy.getX()][xy.getY()] instanceof BadBeast)

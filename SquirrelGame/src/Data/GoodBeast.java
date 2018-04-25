@@ -14,9 +14,15 @@ public class GoodBeast extends Character {
     public void nextStep(EntityContext context) {
         if(getWait() > 0){
             setWait(getWait()-1);
-        } else {
-            context.tryToMove(this, getMD().getDirection());
-            setWait(4);
+        }
+        else {
+            if(context.nearestPlayerEntity(getPlace()) != null){
+                context.tryToMove(this, context.moveAway(this,context.nearestPlayerEntity(getPlace())));
+                setWait(4);
+            } else{
+                context.tryToMove(this,context.getRandMoveDirection().getDirection());
+                setWait(4);
+            }
         }
     }
 }

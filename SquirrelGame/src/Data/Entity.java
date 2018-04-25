@@ -3,7 +3,7 @@ package Data;
 public abstract class Entity {
 
     private int ID;
-    private int energy;     // TODO - kapselung attribute
+    private int energy;
     private XY place;
 
     Entity(int pID, int pEnergy , int x , int y){
