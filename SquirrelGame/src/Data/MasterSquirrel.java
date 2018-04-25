@@ -2,7 +2,7 @@ package Data;
 
 public abstract class MasterSquirrel extends Squirrel {
 
-    public MasterSquirrel(int ID, int x, int y) {
+    protected MasterSquirrel(int ID, int x, int y) {
         super(ID , 1000 , x,y);
     }
 

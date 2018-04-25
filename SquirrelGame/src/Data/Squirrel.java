@@ -2,7 +2,7 @@ package Data;
 
 public abstract class Squirrel extends Character{
 
-    Squirrel(int ID, int energy , int x, int y) {
+    protected Squirrel(int ID, int energy , int x, int y) {
         super(ID,energy, x,y);
     }
 

@@ -3,7 +3,7 @@ package Data;
 public abstract class Game{
     protected State state;
 
-    public Game(State state){
+    protected Game(State state){
         this.state = state;
     }
 

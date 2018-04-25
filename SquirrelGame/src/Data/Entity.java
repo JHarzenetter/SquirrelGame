@@ -6,7 +6,7 @@ public abstract class Entity {
     private int energy;
     private XY place;
 
-    Entity(int pID, int pEnergy , int x , int y){
+    protected Entity(int pID, int pEnergy , int x , int y){
         ID = pID;
         energy = pEnergy;
         place = new XY(x,y);
