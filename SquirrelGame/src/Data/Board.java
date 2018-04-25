@@ -6,10 +6,11 @@ public class Board{
 
     private Entity[] board;
     private XY size;
-    Random rand = new Random();
-    private int id=0;
+    private Random rand = new Random();
+    private int id;
 
     public Board(BoardConfig bc){
+        id = 0;
         board = new Entity[bc.getAmoutnOfEntiies()];
         size = new XY(bc.getLength(),bc.getHeight());
         XY [] xy = getRandXY(bc);
