@@ -51,27 +51,27 @@ public class Board{
     }
 
     private XY[] getRandXY(BoardConfig bc){
-        XY[] randxy = new XY[bc.getAmoutnOfEntiies()];
+        XY[] randXY = new XY[bc.getAmoutnOfEntiies()];
         int count = 0;
         boolean check;
 
-        while(randxy[bc.getAmoutnOfEntiies()-1] == null){
+        while(randXY[bc.getAmoutnOfEntiies()-1] == null){
             check = true;
             int k = rand.nextInt((size.getX()-2))+1;
             int i = rand.nextInt((size.getY()-2))+1;
 
             for(int j=0; j<count; j++){
-                if(randxy[j].getX() == k && randxy[j].getY() == i){
+                if(randXY[j].getX() == k && randXY[j].getY() == i){
                     check = false;
                     break;
                 }
             }
             if(check){
-                randxy[count] = new XY(k,i);
+                randXY[count] = new XY(k,i);
                 count++;
             }
         }
-        return randxy;
+        return randXY;
     }
 
     public FlattenedBoard flattend(){
