@@ -12,8 +12,8 @@ public class Board{
 
     public Board(BoardConfig bc){
         board = new Entity[bc.getAmoutnOfEntiies()];
-        xy = getRandXY(bc);
         size = new XY(bc.getLength(),bc.getHeight());
+        xy = getRandXY(bc);
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
             board[id] = new BadBeast(id,xy[id].getX(),xy[id].getY());
             id++;
@@ -141,7 +141,6 @@ public class Board{
         for(int i=0; i<board.length-1; i++){
             if(board[i] instanceof Character){
                 board[i].nextStep(flattend());
-                System.out.println(""+board[i].toString());
             }
         }
     }
