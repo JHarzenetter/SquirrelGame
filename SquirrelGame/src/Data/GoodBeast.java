@@ -4,15 +4,6 @@ public class GoodBeast extends Character {
 
     public GoodBeast(int pID, int x, int y) {
         super(pID,200, x,y);
-        eatable = true;
-    }
-
-    @Override
-    public boolean collision(Entity e) {
-        if(e instanceof Squirrel){
-            return false;
-        }
-        return true;
     }
 
     public String toString(){

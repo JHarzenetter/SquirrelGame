@@ -21,20 +21,6 @@ public abstract class MasterSquirrel extends Squirrel {
         return false;
     }
 
-    @Override
-    public boolean collision(Entity e) {
-        if(e instanceof MiniSquirrel){
-            if(((MiniSquirrel) e).getMasterID() != getID()){
-                e.updateEnergy(150);
-                return true;
-            }
-        }
-        if(e instanceof MasterSquirrel){
-            return true;
-        }
-        return true;
-    }
-
     public String toString(){
         return ("Type: MasterSquirrel " +super.toString());
     }
