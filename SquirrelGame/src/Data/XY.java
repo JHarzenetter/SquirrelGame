@@ -10,6 +10,10 @@ public final class XY {
         y=py;
     }
 
+    public boolean equals(XY xy){
+        return (xy.getX() == x && xy.getY() == y);
+    }
+
     public int getX(){
         return x;
     }

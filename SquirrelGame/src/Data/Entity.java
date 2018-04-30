@@ -32,6 +32,10 @@ public abstract class Entity {
 
     public void nextStep(EntityContext context){}
 
+    public boolean equals(Entity obj) {
+        return (getID() == obj.getID());
+    }
+
     public String toString(){
         return ("ID: "+ID+" , Energy: "+energy+" , X: "+place.getX()+" , Y: "+place.getY());
     }
