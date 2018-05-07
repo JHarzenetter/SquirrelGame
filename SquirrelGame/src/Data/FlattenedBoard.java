@@ -242,15 +242,4 @@ public class FlattenedBoard  implements BoardView, EntityContext{
     public void killAndReplace(Entity e) {
         b.killAndReplace(e);
     }
-
-    /*public String toSting(){
-        String s = "";
-        for(int i=0; i<b.getXsize(); i++){
-            for(int k=0; k<b.getYsize(); k++){
-                s=s+(""+fb[i][k]);
-            }
-            s=s+('\n');
-        }
-        return s;
-    }*/
 }
