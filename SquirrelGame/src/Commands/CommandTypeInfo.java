@@ -4,6 +4,6 @@ public interface CommandTypeInfo {
 
     String getName();
     String getHelpText();
-    CommandInfo getType();
     Class<?>[] getParamTypes();
+    String methodType();
 }

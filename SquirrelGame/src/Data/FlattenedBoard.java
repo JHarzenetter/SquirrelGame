@@ -37,7 +37,9 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
         XY moveTry = new XY (masterSquirrel.getPlace().getX()+direction.getX(),masterSquirrel.getPlace().getY()+direction.getY());
-
+        if(direction.equals(MoveDirection.None.getDirection())){
+            return;
+        }
         switch(getEntityType(moveTry)) {
             case Air:
                 break;

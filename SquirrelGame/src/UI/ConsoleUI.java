@@ -1,11 +1,26 @@
 package UI;
 
+import Commands.*;
 import Data.BoardView;
 import Data.XY;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class ConsoleUI implements UserInterface{
+
+    private CommandTypeInfo[] cti;
+    private BufferedReader reader;
+    private PrintStream printer;
+
+    public ConsoleUI(){
+        cti = GameCommandType.values();
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        printer = System.out;
+    }
 
     public void render(BoardView view){
         String s = "";
@@ -19,7 +34,7 @@ public class ConsoleUI implements UserInterface{
     }
 
     public int read(){  //read playerinput
-        System.out.println("1:Left 2:Up 3:Right 4:Down");
+        System.out.println("1:left 2:up 3:right 4:down");
         int read;
         Scanner s = new Scanner(System.in);
         read = s.nextInt();
@@ -33,16 +48,8 @@ public class ConsoleUI implements UserInterface{
     }
 
     @Override
-    public MoveDirection getCommand() {
-        int r = read();
-        if(r == 1)
-            return MoveDirection.Left;
-        if(r == 2)
-            return MoveDirection.Up;
-        if(r == 3)
-            return MoveDirection.Right;
-        if(r == 4)
-            return MoveDirection.Down;
-        return MoveDirection.None;
+    public Command getCommand(){
+        CommandScanner commandScanner = new CommandScanner(cti,reader,printer);
+        return commandScanner.next();
     }
 }

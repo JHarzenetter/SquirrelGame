@@ -14,14 +14,16 @@ public class MiniSquirrel extends Squirrel{
         return MsID;
     }
 
-    public void nextStep(){}
-
     public String toString(){
         return ("Type: MiniSquirrel " +super.toString());
     }
 
     @Override
     public void nextStep(EntityContext context) {
-
+        if(getWait() == 0){
+            context.tryToMove(this,context.getRandMoveDirection().getDirection());
+        } else {
+            setWait(getWait()-1);
+        }
     }
 }

@@ -43,7 +43,7 @@ public enum CommandInfo implements CommandTypeInfo{
     }
 
     @Override
-    public CommandInfo getType() {
-        return this;
+    public String methodType() {
+        return null;
     }
 }

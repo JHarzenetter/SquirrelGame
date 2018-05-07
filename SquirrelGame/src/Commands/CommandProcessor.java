@@ -1,7 +1,6 @@
 package Commands;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
@@ -17,7 +16,7 @@ public class CommandProcessor {
         outputStream = System.out;
     }
 
-    public void process() throws IOException, ScanException {
+    public void process(){
         while(true){
             commandScanner = new CommandScanner(CommandInfo.values() , reader , outputStream);
 
@@ -48,7 +47,7 @@ public class CommandProcessor {
         }
     }
 
-    public static void main(String[] args) throws IOException, ScanException {
+    public static void main(String[] args){
         CommandProcessor cp = new CommandProcessor();
 
         cp.process();

@@ -128,6 +128,17 @@ public class Board{
         }
     }
 
+    public void addEntity(Entity e){
+        Entity[] tboard = board.clone();
+        board = new Entity[tboard.length+1];
+
+        for(int i=0; i<tboard.length-1; i++) {
+            board[i] = tboard[i];
+        }
+        board[tboard.length-1] = e;
+        id++;
+    }
+
     public void killAndReplace(Entity e) {
         removeEntity(e);
         addEntity(e,rand.nextInt((size.getX()-2))+1, rand.nextInt((size.getY()-2))+1);
@@ -143,5 +154,9 @@ public class Board{
                 board[i].nextStep(flattened());
             }
         }
+    }
+
+    public int getID() {
+        return id;
     }
 }
