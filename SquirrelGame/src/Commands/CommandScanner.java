@@ -39,6 +39,9 @@ public class CommandScanner {
                 }
             }
 
+            if(commandTypeInfo == null){
+                throw new ScanException();
+            }
             if (commandTypeInfo.getParamTypes() != null) {
                 s = s.substring(s.indexOf(',') + 1).trim();
                 o = new Object[commandTypeInfo.getParamTypes().length];
@@ -56,12 +59,7 @@ public class CommandScanner {
             return new Command(commandTypeInfo, o);
         }
         catch (ScanException s){
-            try {
-                throw new ScanException();
-            } catch (ScanException e) {
-                e.printStackTrace();
-                return null;
-            }
+            return next();
         }
         catch (IOException e){
             return null;
