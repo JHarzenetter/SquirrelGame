@@ -10,6 +10,7 @@ public abstract class Entity {
         ID = pID;
         energy = pEnergy;
         place = new XY(x,y);
+
     }
 
     public int getID(){
