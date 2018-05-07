@@ -6,8 +6,8 @@ import java.util.Random;
 
 public enum MoveDirection {
     left(new XY(-1,0)) , right(new XY(1,0)) , up(new XY(0,-1)) , down(new XY(0,1)) ,
-    UpLeft(new XY(-1,-1)) , UpRight(new XY(1,-1)) , DownLeft(new XY(-1,1)) , DownRight(new XY(1,1)),
-    None(new XY(0,0));
+    upleft(new XY(-1,-1)) , upright(new XY(1,-1)) , downleft(new XY(-1,1)) , downright(new XY(1,1)),
+    none(new XY(0,0));
 
     public final XY direction;
 

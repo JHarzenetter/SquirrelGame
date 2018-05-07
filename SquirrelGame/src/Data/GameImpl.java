@@ -80,6 +80,6 @@ public class GameImpl extends Game {
 
     private void minispawn(Integer i){
         b.addEntity(player.createMini(b.getID(),i));
-        player.setMoveDirection(MoveDirection.None);
+        player.setMoveDirection(MoveDirection.none);
     }
 }
