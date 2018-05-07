@@ -7,9 +7,8 @@ public abstract class MasterSquirrel extends Squirrel {
     }
 
     public MiniSquirrel createMini(int miniID, int energy){
-
-        MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, getPlace().getX(), getPlace().getY(), this.getID()); //sp�ter noch �ndern
-
+        MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, getPlace().getX(), getPlace().getY(), this.getID());
+        updateEnergy(-energy);
         return mini;
     }
 

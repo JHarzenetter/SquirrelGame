@@ -32,7 +32,7 @@ public class CommandScanner {
             }
 
             for (int i = 0; i < commandTypeInfos.length; i++) {
-                if (su.equals(commandTypeInfos[i].getName())) {
+                if (su.trim().equals(commandTypeInfos[i].getName())) {
                     commandTypeInfo = commandTypeInfos[i];
                     outputStream.println("found " + commandTypeInfo.getName());
                     break;
@@ -59,6 +59,7 @@ public class CommandScanner {
             return new Command(commandTypeInfo, o);
         }
         catch (ScanException s){
+            outputStream.println("Wrong Input");
             return next();
         }
         catch (IOException e){
@@ -67,14 +68,16 @@ public class CommandScanner {
     }
 
     private Object makeStringtoObject(String su, Class<?> commandTypeInfo) throws ScanException {
-
+        if(su.isEmpty()){
+            throw new ScanException();
+        }
         switch(commandTypeInfo.getName()){
             case "int":
-                return Integer.parseInt(su);
+                return Integer.parseInt(su.trim());
             case "java.lang.String":
                 return su;
             case "float":
-                return Float.parseFloat(su);
+                return Float.parseFloat(su.trim());
             default:
                 throw new ScanException();
         }
