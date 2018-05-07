@@ -2,31 +2,19 @@ package Commands;
 
 public class Command {
 
-    private String name;
-    private String message;
-    private Object[] params;
-    private CommandInfo commandInfo;
+    private CommandTypeInfo commandTypeInfo;
+    private Object object;
 
-    Command(CommandTypeInfo commandTypeInfo,Object[] params){
-        this.commandInfo = commandTypeInfo.getType();
-        name = commandTypeInfo.getName();
-        message = commandTypeInfo.getHelpText();
-        this.params = params;
+    Command(CommandTypeInfo commandTypeInfo,Object[] object){
+        this.commandTypeInfo = commandTypeInfo;
+        this.object = object;
     }
 
-    public CommandInfo getCommandType(){
-        return commandInfo.getType();
+    public CommandTypeInfo getCommandTypeInfo() {
+        return commandTypeInfo;
     }
 
-    public Object getParams() {
-        return params;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getName() {
-        return name;
+    public Object getObject() {
+        return object;
     }
 }

@@ -1,19 +1,29 @@
 package Commands;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 public class CommandProcessor {
 
     CommandScanner commandScanner;
     Command command;
+    BufferedReader reader;
+    PrintStream outputStream;
 
-    public void process(){
+    CommandProcessor(){
+        reader = new BufferedReader(new InputStreamReader(System.in));
+        outputStream = System.out;
+    }
+
+    public void process() throws IOException, ScanException {
         while(true){
-            commandScanner = new CommandScanner(CommandInfo.values() , read());
+            commandScanner = new CommandScanner(CommandInfo.values() , reader , outputStream);
 
             command = commandScanner.next();
 
-            CommandInfo commandInfo = command.getCommandType();
+            CommandInfo commandInfo = (CommandInfo) command.getCommandTypeInfo();
             switch (commandInfo){
                 case EXIT:
                     System.exit(0);
@@ -38,16 +48,7 @@ public class CommandProcessor {
         }
     }
 
-    public String read(){  //read playerinput
-        System.out.println("Commands expected");
-        String read;
-        Scanner s = new Scanner(System.in);
-        read = s.next();
-
-        return read;
-    }
-
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException, ScanException {
         CommandProcessor cp = new CommandProcessor();
 
         cp.process();

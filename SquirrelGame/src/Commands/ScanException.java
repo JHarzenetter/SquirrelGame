@@ -2,6 +2,6 @@ package Commands;
 
 import java.util.Scanner;
 
-public class ScanException {
+public class ScanException extends Throwable {
 
 }

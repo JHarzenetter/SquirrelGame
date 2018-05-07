@@ -1,31 +1,73 @@
 package Commands;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintStream;
 
 public class CommandScanner {
 
-    String reader;
+    private BufferedReader reader;
     CommandTypeInfo[] commandTypeInfos;
-    Command command;
-    int i = 0;
-    CommandScanner(CommandTypeInfo[] cti , String input){
+    private PrintStream outputStream;
+
+    CommandScanner(CommandTypeInfo[] cti , BufferedReader input , PrintStream outputStream){
         reader = input;
         commandTypeInfos = cti;
+        this.outputStream = outputStream;
     }
 
-    public Command next(){
-        if(reader.equals("help")){
-            return new Command(commandTypeInfos[1],commandTypeInfos[1].getParamTypes());
+    public Command next() throws IOException, ScanException {
+
+        outputStream.println("Input Command");
+        String s = reader.readLine();
+
+        CommandTypeInfo commandTypeInfo = null;
+        Object[] o =  new Object[]{};
+        String su;
+
+        if(s.contains(",")){
+            su = s.substring(0,s.indexOf(',')).trim();
+        }else{
+            su = s.trim();
         }
-        if(reader.equals("exit")){
-            return new Command(commandTypeInfos[0],commandTypeInfos[0].getParamTypes());
+
+        for(int i=0; i < commandTypeInfos.length; i++){
+            if(su.equals(commandTypeInfos[i].getName())){
+                commandTypeInfo = commandTypeInfos[i];
+                outputStream.println("found " + commandTypeInfo.getName());
+                break;
+            }
         }
-        if(reader.equals("addi")){
-            return new Command(commandTypeInfos[2],commandTypeInfos[2].getParamTypes());
+
+        if(commandTypeInfo.getParamTypes() != new Class<?>[]{}){
+            s = s.substring(s.indexOf(',')+1).trim();
+
+            o = new Object[commandTypeInfo.getParamTypes().length];
+
+            for(int i=0; i<o.length ; i++){
+                if(s.contains(",")){
+                    su = s.substring(0 , s.indexOf(',')).trim();
+                    s = s.substring(s.indexOf(',')+1).trim();
+                    o[i] = makeStringtoObject(su,commandTypeInfo.getParamTypes()[i]);
+                }
+            }
         }
-        if(reader.equals("echo")){
-            return new Command(commandTypeInfos[4],commandTypeInfos[4].getParamTypes());
+
+        return new Command(commandTypeInfo,o);
+    }
+
+    private Object makeStringtoObject(String su, Class<?> commandTypeInfo) throws ScanException {
+
+        switch(commandTypeInfo.getName()){
+            case "int":
+                return Integer.parseInt(su);
+            case "java.lang.String":
+                return su;
+            case "float":
+                return Float.parseFloat(su);
+            default:
+                throw new ScanException();
         }
-        return new Command(commandTypeInfos[i++],commandTypeInfos[i++].getParamTypes());
+
     }
 }
