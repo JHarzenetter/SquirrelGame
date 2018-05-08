@@ -48,9 +48,8 @@ public class CommandScanner {
 
                 for (int i = 0; i < o.length; i++) {
                     if (i<o.length-1) {
-                        su = s.substring(0, s.indexOf(',')).trim();
                         s = s.substring(s.indexOf(',') + 1).trim();
-                        o[i] = makeStringtoObject(su, commandTypeInfo.getParamTypes()[i]);
+                        o[i] = makeStringtoObject(s, commandTypeInfo.getParamTypes()[i]);
                     } else {
                         o[i] = makeStringtoObject(s.trim(), commandTypeInfo.getParamTypes()[i]);
                     }
