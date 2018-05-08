@@ -20,6 +20,7 @@ public abstract class MasterSquirrel extends Squirrel {
         return false;
     }
 
+
     public String toString(){
         return ("Type: MasterSquirrel " +super.toString());
     }
