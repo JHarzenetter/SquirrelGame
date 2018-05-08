@@ -139,8 +139,6 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         goodBeast.setPlace(moveTry);
     } //collision ok
 
-    public Entity[][] getFB(){return fb;}
-
     @Override
     public Squirrel nearestPlayerEntity(XY place) {
         int step = 1;

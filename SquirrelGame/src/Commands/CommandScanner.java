@@ -34,7 +34,7 @@ public class CommandScanner {
             for (int i = 0; i < commandTypeInfos.length; i++) {
                 if (su.trim().equals(commandTypeInfos[i].getName())) {
                     commandTypeInfo = commandTypeInfos[i];
-                    outputStream.println("found " + commandTypeInfo.getName());
+                    //outputStream.println("found " + commandTypeInfo.getName());
                     break;
                 }
             }
@@ -48,13 +48,13 @@ public class CommandScanner {
 
                 for (int i = 0; i < o.length; i++) {
                     if (i<o.length-1) {
-                        s = s.substring(s.indexOf(',') + 1).trim();
+                        //s = s.substring(s.indexOf(',') + 1).trim();
                         o[i] = makeStringtoObject(s, commandTypeInfo.getParamTypes()[i]);
                     } else {
                         o[i] = makeStringtoObject(s.trim(), commandTypeInfo.getParamTypes()[i]);
                     }
                 }
-            }
+            } // TODO scanexception --> unckecked
             return new Command(commandTypeInfo, o);
         }
         catch (ScanException s){

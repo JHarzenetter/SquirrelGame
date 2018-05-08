@@ -6,7 +6,7 @@ public abstract class MasterSquirrel extends Squirrel {
         super(ID , 1000 , x,y);
     }
 
-    public MiniSquirrel createMini(int miniID, int energy){
+    public MiniSquirrel createMini(int miniID, int energy){ // TODO enery cap missing
         MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, getPlace().getX(), getPlace().getY(), this.getID());
         updateEnergy(-energy);
         return mini;
