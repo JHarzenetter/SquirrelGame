@@ -44,7 +44,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             case Air:
                 break;
             case Wall:
-                masterSquirrel.setWait(3);
+                masterSquirrel.setWait(300);
                 masterSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 return;
             case GoodPlant:
@@ -80,7 +80,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 kill(miniSquirrel);
                 return;
             case Wall:
-                miniSquirrel.setWait(3);
+                miniSquirrel.setWait(300);
                 miniSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 return;
             case Air:

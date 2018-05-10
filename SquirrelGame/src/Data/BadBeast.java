@@ -29,10 +29,10 @@ public class BadBeast extends Character {
         else {
             if(context.nearestPlayerEntity(getPlace()) != null){
                 context.tryToMove(this, context.moveTo(this,context.nearestPlayerEntity(getPlace())));
-                setWait(4);
+                setWait(400);
             } else{
                 context.tryToMove(this,context.getRandMoveDirection().getDirection());
-                setWait(4);
+                setWait(400);
             }
         }
     }

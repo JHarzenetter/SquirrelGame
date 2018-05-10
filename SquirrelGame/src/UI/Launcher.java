@@ -39,7 +39,7 @@ public class Launcher extends Application {
                 g.update();
                 g.render();
             }
-        } , 0,3000); // 1000 == sec
+        } , 0,100); // 1000 == sec
     }
 
     private static void inputTimer(){
