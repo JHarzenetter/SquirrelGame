@@ -27,10 +27,11 @@ public class GameImpl extends Game {
     }
 
     @Override
-    protected void update() {
+    public void update() {
         state.update();
     }
 
+    @Override
     public void render(){
         ui.render(state.flattenedBoard());
         fb = state.flattenedBoard();

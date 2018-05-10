@@ -9,6 +9,7 @@ public class CommandScanner {
     private BufferedReader reader;
     CommandTypeInfo[] commandTypeInfos;
     private PrintStream outputStream;
+    private Command buffer = null;
 
     public CommandScanner(CommandTypeInfo[] cti, BufferedReader input, PrintStream outputStream){
         reader = input;
@@ -19,7 +20,10 @@ public class CommandScanner {
     public Command next(){
         try {
             outputStream.println("Input Command");
-            String s = reader.readLine();
+            String s;
+            s = reader.readLine();
+
+            System.out.println(s);
 
             CommandTypeInfo commandTypeInfo = null;
             Object[] o = new Object[]{};
@@ -55,13 +59,12 @@ public class CommandScanner {
                     }
                 }
             } // TODO scanexception --> unckecked
+            buffer = new Command(commandTypeInfo, o);
             return new Command(commandTypeInfo, o);
-        }
-        catch (ScanException s){
+        } catch (ScanException s){
             outputStream.println("Wrong Input");
             return next();
-        }
-        catch (IOException e){
+        } catch (IOException e){
             return null;
         }
     }

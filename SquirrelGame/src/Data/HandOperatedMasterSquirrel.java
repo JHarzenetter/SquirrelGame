@@ -1,5 +1,7 @@
 package Data;
 
+import UI.MoveDirection;
+
 public class HandOperatedMasterSquirrel extends MasterSquirrel{
 
     public HandOperatedMasterSquirrel(int ID, int x, int y) {
@@ -13,10 +15,10 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel{
             setWait(getWait()-1);
         } else {
             context.tryToMove(this , getMD().getDirection());
+            setMoveDirection(MoveDirection.none);
         }
         if(getEnergy() < 0){
             updateEnergy(-getEnergy());
         }
-        System.out.println("MasterS Engery : " + this.getEnergy());
     }
 }

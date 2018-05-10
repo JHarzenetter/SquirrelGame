@@ -2,6 +2,7 @@ package UI;
 
 import Commands.*;
 import Data.BoardView;
+import Data.GameImpl;
 import Data.XY;
 
 import java.io.BufferedReader;
@@ -33,23 +34,18 @@ public class ConsoleUI implements UserInterface{
         System.out.println("" + s);
     }
 
-    public int read(){  //read playerinput
-        System.out.println("1:left 2:up 3:right 4:down");
-        int read;
-        Scanner s = new Scanner(System.in);
-        read = s.nextInt();
-
-        if(read < 5 && read > 0){
-            return read;
-        } else {
-            System.out.println("Falsche Eingabe! Erneut versuchen.");
-            return read();
-        }
-    }
-
     @Override
     public Command getCommand(){
         CommandScanner commandScanner = new CommandScanner(cti,reader,printer);
         return commandScanner.next();
+    }
+
+    @Override
+    public void message(String msg) {
+
+    }
+
+    public void inputLoop(GameImpl g){
+       g.processInput();
     }
 }

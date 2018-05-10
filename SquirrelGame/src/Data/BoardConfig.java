@@ -19,6 +19,7 @@ public class BoardConfig{
     public int getLength() {
         return length;
     }
+    public XY getSize(){return new XY(30,20);}
     public int getAmountOfBadBeast(){return amountOfBadBeast;}
     public int getAmountOfGoodBeast(){return amountOfGoodBeast;}
     public int getAmountOfBadPlant(){return amountOfBadPlant;}
