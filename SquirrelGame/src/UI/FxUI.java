@@ -33,7 +33,7 @@ public class FxUI extends Scene implements UserInterface {
         VBox top = new VBox();
         top.getChildren().add(boardCanvas);
         top.getChildren().add(statusLabel);
-        statusLabel.setText("Hallo Welt");
+        statusLabel.setText("Hallo Welt!");
 
         final FxUI fxUI = new FxUI(top, boardCanvas, statusLabel);
         fxUI.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -46,10 +46,9 @@ public class FxUI extends Scene implements UserInterface {
         return fxUI;
     }
 
-
-
     @Override
     public void render(BoardView view) {
+        System.out.println("hallo");
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -72,7 +71,6 @@ public class FxUI extends Scene implements UserInterface {
         gc.fillText("Where are the beasts?", 50, 50);
         gc.setFill(Color.RED);
         gc.fillOval(150, 150, 50, 50);
-        gc.fillRect(50,50,60,60);
     }
 
 

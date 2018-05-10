@@ -23,17 +23,6 @@ public class ConsoleUI implements UserInterface{
         printer = System.out;
     }
 
-    public void render(BoardView view){
-        String s = "";
-        for(int i = 0; i< view.getSize().getY(); i++){
-            for(int k = 0; k< view.getSize().getX(); k++){
-                s += view.getEntityType(new XY(k,i)).getWert();
-            }
-            s= s + "\n";
-        }
-        System.out.println("" + s);
-    }
-
     @Override
     public Command getCommand(){
         CommandScanner commandScanner = new CommandScanner(cti,reader,printer);
@@ -47,5 +36,16 @@ public class ConsoleUI implements UserInterface{
 
     public void inputLoop(GameImpl g){
        g.processInput();
+    }
+
+    public void render(BoardView view){
+         String s = "";
+        for(int i = 0; i< view.getSize().getY(); i++){
+            for(int k = 0; k< view.getSize().getX(); k++){
+                s += view.getEntityType(new XY(k,i)).getWert();
+            }
+            s= s + "\n";
+        }
+        System.out.println("" + s);
     }
 }
