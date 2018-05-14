@@ -25,6 +25,6 @@ public class BoardConfig{
     public int getAmountOfBadPlant(){return amountOfBadPlant;}
     public int getAmountOfGoodPlant(){return amountOfGoodPlant;}
     public int getAmountOfWall(){return amountOfWall;}
-    public int getAmoutnOfEntiies(){return ((length+height)*2 -2+amountOfBadBeast+amountOfGoodBeast+amountOfBadPlant+amountOfGoodPlant+amountOfWall);}
+    public int getAmountOfEntities(){return ((length+height)*2 -2+amountOfBadBeast+amountOfGoodBeast+amountOfBadPlant+amountOfGoodPlant+amountOfWall);}
 
 }

@@ -1,24 +1,30 @@
 package Data;
 
+import UI.UserInterface;
+
 public abstract class Game{
     protected State state;
+    protected Board board;
+    protected UserInterface ui;
     private long FPS;
 
-    protected Game(State state){
+    public Game(State state , Board board){
         this.state = state;
+        this.board = board;
         FPS = 100;
     }
 
     public void run() {
-            render();
-            processInput();
-            update();
+           while(true){
+               render();
+               processInput();
+               update();
+           }
     }
 
-    protected abstract void update();
+    public abstract void update();
 
-    protected abstract void processInput();
+    public abstract void processInput();
 
-    protected abstract void render();
-
+    public void render(){ui.render(state.flattenedBoard());}
 }

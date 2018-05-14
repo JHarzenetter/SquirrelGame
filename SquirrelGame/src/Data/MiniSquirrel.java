@@ -23,7 +23,7 @@ public class MiniSquirrel extends Squirrel{
         if(getWait() == 0){
             context.tryToMove(this,context.getRandMoveDirection().getDirection());
         } else {
-            setWait(getWait()-1);
+            setWait(getWait()-100);
         }
     }
 }

@@ -12,7 +12,7 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel{
     public void nextStep(EntityContext context) {
         if(getWait() > 0){
             System.out.println("Stunned for "+getWait()+" rounds");
-            setWait(getWait()-1);
+            setWait(getWait()-100);
         } else {
             context.tryToMove(this , getMD().getDirection());
             setMoveDirection(MoveDirection.none);

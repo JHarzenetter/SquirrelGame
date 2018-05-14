@@ -11,7 +11,7 @@ public class Board{
 
     public Board(BoardConfig bc){
         id = 0;
-        board = new Entity[bc.getAmoutnOfEntiies()];
+        board = new Entity[bc.getAmountOfEntities()];
         size = new XY(bc.getLength(),bc.getHeight());
         XY [] xy = getRandXY(bc);
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
@@ -51,11 +51,11 @@ public class Board{
     }
 
     private XY[] getRandXY(BoardConfig bc){
-        XY[] randXY = new XY[bc.getAmoutnOfEntiies()];
+        XY[] randXY = new XY[bc.getAmountOfEntities()];
         int count = 0;
         boolean check;
 
-        while(randXY[bc.getAmoutnOfEntiies()-1] == null){
+        while(randXY[bc.getAmountOfEntities()-1] == null){
             check = true;
             int k = rand.nextInt((size.getX()-2))+1;
             int i = rand.nextInt((size.getY()-2))+1;
@@ -159,9 +159,11 @@ public class Board{
     @Override
     public String toString() {
         String s = "";
-        for(int i=0; i<board.length; i++){
-            s+=board[i].toString();
-            s+="\n";
+        for(int i=0; i<board.length-1; i++){
+            if(!(board[i] instanceof Wall)) {
+                s+=board[i].toString();
+                s+="\n";
+            }
         }
         return s;
     }

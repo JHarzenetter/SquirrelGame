@@ -4,7 +4,6 @@ import Commands.Command;
 import Commands.GameCommandType;
 import UI.ConsoleUI;
 import UI.MoveDirection;
-import UI.UserInterface;
 
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
@@ -12,17 +11,14 @@ import java.lang.reflect.Method;
 
 public class GameImpl extends Game {
 
-    private UserInterface ui;
     private FlattenedBoard fb;
     private HandOperatedMasterSquirrel player;
     private Command c;
     private PrintStream printer = System.out;
-    private Board b;
 
     public GameImpl(State state , Board b) {
-        super(state);
+        super(state,b);
         ui = new ConsoleUI();
-        this.b = b;
         player = b.getPlayer();
     }
 
@@ -68,7 +64,7 @@ public class GameImpl extends Game {
     }
 
     private void all(){
-        System.out.println(b.toString());
+        System.out.println(board.toString());
     }
 
     private void playerengery(){
@@ -80,7 +76,7 @@ public class GameImpl extends Game {
     }
 
     private void minispawn(Integer i){
-        b.addEntity(player.createMini(b.getID(),i));
+        board.addEntity(player.createMini(board.getID(),i));
         player.setMoveDirection(MoveDirection.none);
     }
 }

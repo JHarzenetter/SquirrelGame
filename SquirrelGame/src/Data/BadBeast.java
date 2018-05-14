@@ -24,7 +24,7 @@ public class BadBeast extends Character {
         if(bites == 7){
             context.killAndReplace(this);
         } else if(getWait() > 0){
-            setWait(getWait()-1);
+            setWait(getWait()-100);
         }
         else {
             if(context.nearestPlayerEntity(getPlace()) != null){

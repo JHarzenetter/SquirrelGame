@@ -13,43 +13,43 @@ public class Launcher extends Application {
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
     static State s = new State(b);
-    static GameImpl g = new GameImpl(s,b);
     static ConsoleUI cui = new ConsoleUI();
 
     public static void main(String[] args) {
 
+        Game g = new GameImpl(s,b);
         int i=2;
 
         if(i==0){ // first mode
             g.run();
         } else if(i == 1){ // timer mode
             g.render();
-            startGame();
-            inputTimer();
+            startGame(g);
+            inputTimer(g);
         }else if(i == 2){
             Application.launch(args); // javafx mode
         }
     }
 
-    private static void startGame(){
+    private static void startGame(Game g){
         //System.out.println(System.nanoTime());
         timerGame.scheduleAtFixedRate(new TimerTask(){
             @Override
             public void run() {
-                g.update();
                 g.render();
+                g.update();
             }
         } , 0,100); // 1000 == sec
     }
 
-    private static void inputTimer(){
+    private static void inputTimer(Game g){
         timerInput.scheduleAtFixedRate(new TimerTask(){
             @Override
             public void run() {
-                cui.inputLoop(g);
+                g.processInput();
                 g.render();
             }
-        } , 10 , 1000);
+        } , 0 , 1000);
     }
 
     @Override
@@ -57,12 +57,14 @@ public class Launcher extends Application {
 
         BoardConfig boardConfig = new BoardConfig();
         FxUI fxUI = FxUI.createInstance(boardConfig.getSize());
+        final Game game = new GameImplFxUI(s,b,fxUI);
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Diligent Squirrel");
         fxUI.getWindow().setOnCloseRequest(evt -> System.exit(-1));
         primaryStage.show();
 
-        startGame();
+        startGame(game);
+        inputTimer(game);
     }
 }

@@ -13,7 +13,7 @@ public class GoodBeast extends Character {
     @Override
     public void nextStep(EntityContext context) {
         if(getWait() > 0){
-            setWait(getWait()-1);
+            setWait(getWait()-100);
         }
         else {
             if(context.nearestPlayerEntity(getPlace()) != null){

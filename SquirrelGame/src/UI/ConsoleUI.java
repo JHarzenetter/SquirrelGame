@@ -34,10 +34,6 @@ public class ConsoleUI implements UserInterface{
 
     }
 
-    public void inputLoop(GameImpl g){
-       g.processInput();
-    }
-
     public void render(BoardView view){
          String s = "";
         for(int i = 0; i< view.getSize().getY(); i++){
