@@ -1,5 +1,5 @@
 package Commands;
 
-public class ScanException extends Exception {
+public class ScanException extends RuntimeException {
 
 }

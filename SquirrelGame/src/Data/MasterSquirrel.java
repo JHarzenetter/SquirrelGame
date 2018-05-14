@@ -6,10 +6,14 @@ public abstract class MasterSquirrel extends Squirrel {
         super(ID , 1000 , x,y);
     }
 
-    public MiniSquirrel createMini(int miniID, int energy){ // TODO enery cap missing
-        MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, getPlace().getX(), getPlace().getY(), this.getID());
-        updateEnergy(-energy);
-        return mini;
+    public MiniSquirrel createMini(int miniID, int energy){
+        if(energy>=100 && energy<=this.getEnergy()){
+            MiniSquirrel mini = new MiniSquirrel(miniID/*eigene*/, energy, getPlace().getX(), getPlace().getY(), this.getID());
+            updateEnergy(-energy);
+            return mini;
+        } else {
+            throw new NotEnoughEnergyExeption();
+        }
     }
 
     public boolean checkEntitie(Entity e){

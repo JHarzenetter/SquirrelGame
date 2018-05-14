@@ -58,7 +58,7 @@ public class CommandScanner {
                         o[i] = makeStringtoObject(s.trim(), commandTypeInfo.getParamTypes()[i]);
                     }
                 }
-            } // TODO scanexception --> unckecked
+            }
             buffer = new Command(commandTypeInfo, o);
             return new Command(commandTypeInfo, o);
         } catch (ScanException s){

@@ -67,8 +67,8 @@ public class GameImpl extends Game {
         System.exit(0);
     }
 
-    private void all(){ // TODO all gibt toString von jeder Entity
-        //?????????????????????????
+    private void all(){
+        System.out.println(b.toString());
     }
 
     private void playerengery(){

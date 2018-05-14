@@ -156,6 +156,16 @@ public class Board{
         }
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for(int i=0; i<board.length; i++){
+            s+=board[i].toString();
+            s+="\n";
+        }
+        return s;
+    }
+
     public int getID() {
         return id;
     }
