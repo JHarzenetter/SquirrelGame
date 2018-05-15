@@ -4,6 +4,7 @@ import Commands.Command;
 import Commands.GameCommandType;
 import UI.ConsoleUI;
 import UI.MoveDirection;
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +13,7 @@ import java.lang.reflect.Method;
 public class GameImpl extends Game {
 
     private FlattenedBoard fb;
-    private HandOperatedMasterSquirrel player;
+    private MasterSquirrel player;
     private Command c;
     private PrintStream printer = System.out;
 

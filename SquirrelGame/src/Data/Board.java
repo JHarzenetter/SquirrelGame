@@ -82,10 +82,10 @@ public class Board{
         return new FlattenedBoard(flattendBoard,this);
     }
 
-    public HandOperatedMasterSquirrel getPlayer(){
+    public MasterSquirrel getPlayer(){
         for(int i=0; i<board.length-1; i++){
-            if (board[i] instanceof HandOperatedMasterSquirrel){
-                return (HandOperatedMasterSquirrel)board[i];
+            if (board[i] instanceof MasterSquirrel){
+                return (MasterSquirrel) board[i];
             }
         }
         return null;

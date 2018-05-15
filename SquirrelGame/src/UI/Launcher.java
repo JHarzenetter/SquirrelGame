@@ -9,23 +9,23 @@ import java.util.TimerTask;
 public class Launcher extends Application {
 
     private static Timer timerGame = new Timer();
-    private static Timer timerInput = new Timer();
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
     static State s = new State(b);
-    static ConsoleUI cui = new ConsoleUI();
 
     public static void main(String[] args) { //TODO: schalter besser einbauen
 
         Game g = new GameImpl(s,b);
-        int i=2;
+        int i =1;
 
         if(i==0){ // first mode
             g.run();
         } else if(i == 1){ // timer mode
             g.render();
             startGame(g);
-            inputTimer(g);
+            while(true){
+                g.processInput();
+            }
         }else if(i == 2){
             Application.launch(args); // javafx mode
         }
@@ -42,16 +42,6 @@ public class Launcher extends Application {
         } , 0,100); // 1000 == sec
     }
 
-    private static void inputTimer(Game g){
-        timerInput.scheduleAtFixedRate(new TimerTask(){
-            @Override
-            public void run() {
-                g.processInput();
-                g.render();
-            }
-        } , 0 , 1000);
-    }
-
     @Override
     public void start(Stage primaryStage) {
 
@@ -65,6 +55,5 @@ public class Launcher extends Application {
         primaryStage.show();
 
         startGame(game);
-        inputTimer(game);
     }
 }
