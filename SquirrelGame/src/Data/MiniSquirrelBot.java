@@ -26,13 +26,13 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
-        public XY getViewIpperRight() {
+        public XY getViewUpperRight() {
             return null;
         }
 
         @Override
         public EntityType getEntityAt(XY xy) {
-            return null;
+            return context.getEntityType(xy);
         }
 
         @Override
@@ -47,7 +47,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         @Override
         public int getEnergy() {
-            return 0;
+            return getEnergy();
         }
     }
 }

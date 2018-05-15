@@ -5,6 +5,8 @@ import UI.MoveDirection;
 public interface EntityContext {
 
     XY getSize();
+    Board getBoard();
+
     void tryToMove(MiniSquirrel miniSquirrel , XY direction);
     void tryToMove(BadBeast badBeast , XY direction);
     void tryToMove(GoodBeast goodBeast , XY direction);

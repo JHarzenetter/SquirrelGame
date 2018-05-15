@@ -35,6 +35,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
     public XY getSize(){return size;}
 
+    @Override
+    public Board getBoard() {
+        return b;
+    }
+
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
         XY moveTry = new XY (masterSquirrel.getPlace().getX()+direction.getX(),masterSquirrel.getPlace().getY()+direction.getY());
         if(direction.equals(MoveDirection.none.getDirection())){

@@ -1,10 +1,6 @@
 package Data;
 
-import BotAPI.BotController;
-import BotAPI.BotControllerFactory;
 import BotAPI.ControllerContext;
-import Data.EntityContext;
-import Data.Squirrel;
 import UI.MoveDirection;
 
 public class MasterSquirrelBot extends MasterSquirrel{
@@ -34,7 +30,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public XY getViewIpperRight() {
+        public XY getViewUpperRight() {
             return null;
         }
 
@@ -54,7 +50,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
 
         @Override
         public void spawnMiniBot(XY direction, int energy) {
-
+            context.getBoard().addEntity(bot.createMini(direction,energy));
         }
 
         @Override

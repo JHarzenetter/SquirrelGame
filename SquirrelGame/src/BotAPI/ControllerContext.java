@@ -6,7 +6,7 @@ import UI.MoveDirection;
 
 public interface ControllerContext {
     XY getViewLowerLeft();
-    XY getViewIpperRight();
+    XY getViewUpperRight();
     EntityType getEntityAt(XY xy);
     void move(MoveDirection direction);
     void spawnMiniBot(XY direction,int energy);

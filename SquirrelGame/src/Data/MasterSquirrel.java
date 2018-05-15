@@ -20,6 +20,20 @@ public abstract class MasterSquirrel extends Squirrel {
         }
     }
 
+    public MiniSquirrel createMini(XY direction , int energy){
+        try{
+            if(energy>=100 && energy<=this.getEnergy()){
+                MiniSquirrel mini = new MiniSquirrel(energy, getPlace().getX() + direction.getX(), getPlace().getY() + direction.getY(), this);
+                updateEnergy(-energy);
+                return mini;
+            } else {
+                throw new NotEnoughEnergyExeption();
+            }
+        } catch (NotEnoughEnergyExeption e){
+            return null;
+        }
+    }
+
     public boolean checkEntitie(Entity e){
         if(e instanceof MiniSquirrel)
             if(((MiniSquirrel)e).getMaster() == this){
