@@ -4,8 +4,8 @@ import UI.MoveDirection;
 
 public class HandOperatedMasterSquirrel extends MasterSquirrel{
 
-    public HandOperatedMasterSquirrel(int ID, int x, int y) {
-        super(ID, x, y);
+    public HandOperatedMasterSquirrel(int x, int y) {
+        super(x, y);
     }
 
     @Override

@@ -2,16 +2,15 @@ package Data;
 
 public class MiniSquirrel extends Squirrel{
 
+    protected MasterSquirrel master;
 
-    private int MsID;
-
-    public MiniSquirrel(int ID, int energy, int x, int y, int MsID) {
-        super(ID, energy ,x, y);
-        this.MsID = MsID;
+    public MiniSquirrel(int energy, int x, int y, MasterSquirrel master) {
+        super(6, energy ,x, y);
+        this.master = master;
     }
 
-    public int getMasterID(){
-        return MsID;
+    public MasterSquirrel getMaster(){
+        return master;
     }
 
     public String toString(){

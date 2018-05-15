@@ -1,13 +1,17 @@
 package Data;
 
-import BotAPI.BotController;
-import BotAPI.BotControllerFactory;
 import BotAPI.ControllerContext;
+import UI.MoveDirection;
 
-public class MiniSquirrelBot extends Squirrel implements BotController, BotControllerFactory {
+public class MiniSquirrelBot extends MiniSquirrel{
 
-    protected MiniSquirrelBot(int ID, int energy, int x, int y) {
-        super(ID, energy, x, y);
+    private EntityContext context;
+    private MiniSquirrelBot mini;
+
+    protected MiniSquirrelBot(int energy, int x, int y , MasterSquirrel MsID , EntityContext context, MiniSquirrelBot mini) {
+        super(energy, x, y,MsID);
+        this.context = context;
+        this.mini = mini;
     }
 
     @Override
@@ -15,18 +19,35 @@ public class MiniSquirrelBot extends Squirrel implements BotController, BotContr
 
     }
 
-    @Override
-    public void nextStep(ControllerContext view) {
+    private class ControllerContextImplMini implements ControllerContext {
+        @Override
+        public XY getViewLowerLeft() {
+            return null;
+        }
 
-    }
+        @Override
+        public XY getViewIpperRight() {
+            return null;
+        }
 
-    @Override
-    public BotController createMasterBotController() {
-        return null;
-    }
+        @Override
+        public EntityType getEntityAt(XY xy) {
+            return null;
+        }
 
-    @Override
-    public BotController createMiniBotController() {
-        return null;
+        @Override
+        public void move(MoveDirection direction) {
+
+        }
+
+        @Override
+        public void spawnMiniBot(XY direction, int energy) {
+
+        }
+
+        @Override
+        public int getEnergy() {
+            return 0;
+        }
     }
 }

@@ -1,4 +1,4 @@
 package Data;
 
-public class NotEnoughEnergyExeption extends RuntimeException {
+public class NotEnoughEnergyExeption extends Exception {
 }

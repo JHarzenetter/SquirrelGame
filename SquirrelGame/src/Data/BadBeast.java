@@ -4,8 +4,8 @@ public class BadBeast extends Character {
 
     private int bites;
 
-    public BadBeast(int pID, int x, int y) {
-        super(pID, -150, x, y);
+    public BadBeast(int x, int y) {
+        super(1, -150, x, y);
         bites = 0;
     }
 

@@ -7,32 +7,32 @@ public class Board{
     private Entity[] board;
     private XY size;
     private Random rand = new Random();
-    private int id;
+    private int count = 0;
+    //ID's: 0 = Wand , 1 = BadBeast , 2 = GoodBeast , 3 = BadPlant , 4 = GoodPlant , 5 = MasterS , 6 = MiniS
 
     public Board(BoardConfig bc){
-        id = 0;
         board = new Entity[bc.getAmountOfEntities()];
         size = new XY(bc.getLength(),bc.getHeight());
         XY [] xy = getRandXY(bc);
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
-            board[id] = new BadBeast(id,xy[id].getX(),xy[id].getY());
-            id++;
+            board[count] = new BadBeast(xy[count].getX(),xy[count].getY());
+            count++;
         }
         for(int i=0; i<bc.getAmountOfBadPlant(); i++){
-            board[id] = new BadPlant(id,xy[id].getX(),xy[id].getY());
-            id++;
+            board[count] = new BadPlant(xy[count].getX(),xy[count].getY());
+            count++;
         }
         for(int i=0; i<bc.getAmountOfGoodBeast(); i++){
-            board[id] = new GoodBeast(id,xy[id].getX(),xy[id].getY());
-            id++;
+            board[count] = new GoodBeast(xy[count].getX(),xy[count].getY());
+            count++;
         }
         for(int i=0; i<bc.getAmountOfGoodPlant(); i++){
-            board[id] = new GoodPlant(id,xy[id].getX(),xy[id].getY());
-            id++;
+            board[count] = new GoodPlant(xy[count].getX(),xy[count].getY());
+            count++;
         }
         for(int i=0; i<bc.getAmountOfWall(); i++){
-            board[id] = new Wall(id,xy[id].getX(),xy[id].getY());
-            id++;
+            board[count] = new Wall(xy[count].getX(),xy[count].getY());
+            count++;
         }
 
         for(int i=0; i<size.getX(); i++){
@@ -40,14 +40,14 @@ public class Board{
                 if(i >=1 && k>=1 && i<size.getX()-1 && k<size.getY()-1){
                 }
                 else {
-                    board[id] = new Wall(id,i,k);
-                    id++;
+                    board[count] = new Wall(i,k);
+                    count++;
                 }
             }
         }
 
-        board[id] = new HandOperatedMasterSquirrel(id/*ID*/, xy[id].getX()/*X*/, xy[id].getY()/*Y*/);
-        id++;
+        board[count] = new HandOperatedMasterSquirrel(xy[count].getX(), xy[count].getY()/*Y*/);
+        count++;
     }
 
     private XY[] getRandXY(BoardConfig bc){
@@ -111,20 +111,20 @@ public class Board{
             board[i] = tboard[i];
         }
         if(e instanceof GoodPlant){
-            board[tboard.length-1] = new GoodPlant(id,x,y);
-            id++;
+            board[tboard.length-1] = new GoodPlant(x,y);
+            count++;
         }
         if(e instanceof BadPlant){
-            board[tboard.length-1] = new BadPlant(id,x,y);
-            id++;
+            board[tboard.length-1] = new BadPlant(x,y);
+            count++;
         }
         if(e instanceof GoodBeast){
-            board[tboard.length-1] = new GoodBeast(id,x,y);
-            id++;
+            board[tboard.length-1] = new GoodBeast(x,y);
+            count++;
         }
         if(e instanceof BadBeast){
-            board[tboard.length-1] = new BadBeast(id,x,y);
-            id++;
+            board[tboard.length-1] = new BadBeast(x,y);
+            count++;
         }
     }
 
@@ -136,7 +136,7 @@ public class Board{
             board[i] = tboard[i];
         }
         board[tboard.length-1] = e;
-        id++;
+        count++;
     }
 
     public void killAndReplace(Entity e) {
@@ -166,9 +166,5 @@ public class Board{
             }
         }
         return s;
-    }
-
-    public int getID() {
-        return id;
     }
 }

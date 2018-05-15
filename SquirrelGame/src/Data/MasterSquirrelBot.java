@@ -5,11 +5,12 @@ import BotAPI.BotControllerFactory;
 import BotAPI.ControllerContext;
 import Data.EntityContext;
 import Data.Squirrel;
+import UI.MoveDirection;
 
-public class MasterSquirrelBot extends Squirrel implements BotController, BotControllerFactory {
+public class MasterSquirrelBot extends MasterSquirrel{
 
-    protected MasterSquirrelBot(int ID, int energy, int x, int y) {
-        super(ID, energy, x, y);
+    protected MasterSquirrelBot(int x, int y) {
+        super(x, y);
     }
 
     @Override
@@ -17,18 +18,48 @@ public class MasterSquirrelBot extends Squirrel implements BotController, BotCon
 
     }
 
-    @Override
-    public void nextStep(ControllerContext view) {
+    private class ControllerContextImplMaster implements ControllerContext {
 
-    }
+        private MasterSquirrelBot bot;
+        private EntityContext context;
 
-    @Override
-    public BotController createMasterBotController() {
-        return null;
-    }
+        ControllerContextImplMaster(MasterSquirrelBot bot, EntityContext context) {
+            this.bot = bot;
+            this.context = context;
+        }
 
-    @Override
-    public BotController createMiniBotController() {
-        return null;
+        @Override
+        public XY getViewLowerLeft() {
+            return null;
+        }
+
+        @Override
+        public XY getViewIpperRight() {
+            return null;
+        }
+
+        @Override
+        public EntityType getEntityAt(XY xy) {
+            return context.getEntityType(xy);
+        }
+
+        @Override
+        public void move(MoveDirection direction) {
+            if (direction.getDirection().getX() - bot.getPlace().getX() <= 1 && direction.getDirection().getY() - bot.getPlace().getY() <= 1) {
+                bot.setMoveDirection(direction);
+            } else {
+                bot.setMoveDirection(MoveDirection.none);
+            }
+        }
+
+        @Override
+        public void spawnMiniBot(XY direction, int energy) {
+
+        }
+
+        @Override
+        public int getEnergy() {
+            return bot.getEnergy();
+        }
     }
 }

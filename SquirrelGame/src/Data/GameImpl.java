@@ -76,7 +76,9 @@ public class GameImpl extends Game {
     }
 
     private void minispawn(Integer i){
-        board.addEntity(player.createMini(board.getID(),i));
-        player.setMoveDirection(MoveDirection.none);
+        if(player.createMini(i) != null){
+            board.addEntity(player.createMini(i));
+            player.setMoveDirection(MoveDirection.none);
+        }
     }
 }

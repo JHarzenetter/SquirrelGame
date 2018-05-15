@@ -31,7 +31,7 @@ public class GameImplFxUI extends Game{
     }
 
     private void minispawn(Integer i){
-        board.addEntity(player.createMini(board.getID(),i));
+        board.addEntity(player.createMini(i));
         player.setMoveDirection(MoveDirection.none);
     }
 }

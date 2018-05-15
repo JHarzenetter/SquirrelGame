@@ -2,8 +2,8 @@ package Data;
 
 public class GoodBeast extends Character {
 
-    public GoodBeast(int pID, int x, int y) {
-        super(pID,200, x,y);
+    public GoodBeast(int x, int y) {
+        super(2,200, x,y);
     }
 
     public String toString(){
