@@ -44,7 +44,7 @@ public class CommandScanner {
             }
 
             if(commandTypeInfo == null){
-                throw new ScanException();
+                throw new ScanException("ScanExeption!!"); //TODO: constuctor exeption
             }
             if (commandTypeInfo.getParamTypes() != null) {
                 s = s.substring(s.indexOf(',') + 1).trim();
@@ -71,7 +71,7 @@ public class CommandScanner {
 
     private Object makeStringtoObject(String su, Class<?> commandTypeInfo) throws ScanException {
         if(su.isEmpty()){
-            throw new ScanException();
+            throw new ScanException("Empty String!");
         }
         switch(commandTypeInfo.getName()){
             case "int":
@@ -81,7 +81,7 @@ public class CommandScanner {
             case "float":
                 return Float.parseFloat(su.trim());
             default:
-                throw new ScanException();
+                throw new ScanException("String isn't valid");
         }
 
     }

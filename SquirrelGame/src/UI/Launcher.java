@@ -15,7 +15,7 @@ public class Launcher extends Application {
     static State s = new State(b);
     static ConsoleUI cui = new ConsoleUI();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //TODO: schalter besser einbauen
 
         Game g = new GameImpl(s,b);
         int i=2;

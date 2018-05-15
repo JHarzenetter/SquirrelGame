@@ -26,8 +26,11 @@ public class GameImplFxUI extends Game{
     @Override
     public void processInput() {
         while(true){
-            player.setMoveDirection(MoveDirection.valueOf(ui.getCommand().getCommandTypeInfo().getName()));
+            player.setMoveDirection(MoveDirection.valueOf(ui.getCommand().getCommandTypeInfo().getName())); //TODO: enscheidung der Inteligenz in contorller auslagern
         }
+        /*while(true){
+            player.setMoveDirection(MoveDirection.getRandCommand()); //--> bot mode
+        }*/
     }
 
     private void minispawn(Integer i){

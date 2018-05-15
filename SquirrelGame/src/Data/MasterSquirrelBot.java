@@ -25,7 +25,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public XY getViewLowerLeft() {
+        public XY getViewLowerLeft() { // eckpunkte des sichtbereichs
             return null;
         }
 

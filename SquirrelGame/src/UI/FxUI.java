@@ -90,10 +90,7 @@ public class FxUI extends Scene implements UserInterface {
         GraphicsContext gc = boardCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, boardCanvas.getWidth(), boardCanvas.getHeight());
         XY viewSize = view.getSize();
-        // dummy for rendering a board snapshot, TODO: change it!
-        /*gc.fillText("Where are the beasts?", 50, 50);
-        gc.setFill(Color.RED);
-        gc.fillOval(150, 150, 50, 50);*/
+
         for(int i=0; i<viewSize.getX();i++){
             for(int k=0; k<viewSize.getY();k++){
                 switch (view.getEntityType(new XY(i,k))){
