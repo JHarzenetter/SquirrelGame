@@ -6,6 +6,8 @@ public interface EntityContext {
 
     XY getSize();
     Board getBoard();
+    EntityType getEntityType(XY xy);
+    Entity getEntity(XY xy);
 
     void tryToMove(MiniSquirrel miniSquirrel , XY direction);
     void tryToMove(BadBeast badBeast , XY direction);
@@ -15,7 +17,6 @@ public interface EntityContext {
 
     void kill(Entity e);
     void killAndReplace(Entity e);
-    EntityType getEntityType(XY xy);
 
     XY moveTo(BadBeast badBeast , Entity en);
     XY moveAway(GoodBeast goodBeast , Entity en);

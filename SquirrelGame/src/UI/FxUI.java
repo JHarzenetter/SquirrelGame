@@ -16,8 +16,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import static Commands.GameCommandType.*;
-
 public class FxUI extends Scene implements UserInterface {
 
     private static final int CELL_SIZE = 10;
@@ -94,35 +92,35 @@ public class FxUI extends Scene implements UserInterface {
         for(int i=0; i<viewSize.getX();i++){
             for(int k=0; k<viewSize.getY();k++){
                 switch (view.getEntityType(new XY(i,k))){
-                    case BadPlant:
+                    case BAD_PLANT:
                         gc.setFill(Color.RED);
                         gc.fillRect(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case GoodPlant:
+                    case GOOD_PLANT:
                         gc.setFill(Color.GREEN);
                         gc.fillRect(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case BadBeast:
+                    case BAD_BEAST:
                         gc.setFill(Color.RED);
                         gc.fillOval(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case Goodbeast:
+                    case GOOD_BEAST:
                         gc.setFill(Color.GREEN);
                         gc.fillOval(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case MasterSquirrel:
+                    case MASTER_SQUIRREL:
                         gc.setFill(Color.BLUE);
                         gc.fillRect(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case MiniSquirrel:
+                    case MINI_SQUIRREL:
                         gc.setFill(Color.BLUE);
                         gc.fillOval(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case Wall:
+                    case WALL:
                         gc.setFill(Color.ORANGE);
                         gc.fillRect(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case Air:
+                    case NONE:
                         break;
                 }
             }

@@ -3,6 +3,7 @@ package Commands;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.logging.Logger;
 
 public class CommandScanner {
 
@@ -10,6 +11,7 @@ public class CommandScanner {
     CommandTypeInfo[] commandTypeInfos;
     private PrintStream outputStream;
     private Command buffer = null;
+    private static Logger logger = Logger.getLogger("InputLogger");
 
     public CommandScanner(CommandTypeInfo[] cti, BufferedReader input, PrintStream outputStream){
         reader = input;
@@ -23,7 +25,9 @@ public class CommandScanner {
             String s;
             s = reader.readLine();
 
-            System.out.println(s);
+            if(s.equals(buffer.getCommandTypeInfo().getName())){
+                return buffer;
+            }
 
             CommandTypeInfo commandTypeInfo = null;
             Object[] o = new Object[]{};
@@ -44,7 +48,8 @@ public class CommandScanner {
             }
 
             if(commandTypeInfo == null){
-                throw new ScanException("ScanExeption!!"); //TODO: constuctor exeption
+                logger.severe("ScanException detected");
+                throw new ScanException("ScanException!!");
             }
             if (commandTypeInfo.getParamTypes() != null) {
                 s = s.substring(s.indexOf(',') + 1).trim();
@@ -60,17 +65,19 @@ public class CommandScanner {
                 }
             }
             buffer = new Command(commandTypeInfo, o);
-            return new Command(commandTypeInfo, o);
+            return buffer;
         } catch (ScanException s){
             outputStream.println("Wrong Input");
             return next();
-        } catch (IOException e){
-            return null;
+        } catch (IOException e) {
+            logger.severe("IOException detected");
+            return next();
         }
     }
 
     private Object makeStringtoObject(String su, Class<?> commandTypeInfo) throws ScanException {
         if(su.isEmpty()){
+            logger.warning("String was Empty");
             throw new ScanException("Empty String!");
         }
         switch(commandTypeInfo.getName()){
