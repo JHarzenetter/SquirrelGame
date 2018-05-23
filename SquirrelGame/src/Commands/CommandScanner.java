@@ -44,7 +44,7 @@ public class CommandScanner {
             }
 
             if(commandTypeInfo == null){
-                throw new ScanException("ScanExeption!!"); //TODO: constuctor exeption
+                throw new ScanException("ScanExeption!!");
             }
             if (commandTypeInfo.getParamTypes() != null) {
                 s = s.substring(s.indexOf(',') + 1).trim();

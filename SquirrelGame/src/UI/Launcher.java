@@ -10,24 +10,27 @@ public class Launcher extends Application {
 
     private static Timer timerGame = new Timer();
     private static Timer timerInput = new Timer();
+    private static String version = "";
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
     static State s = new State(b);
-    static ConsoleUI cui = new ConsoleUI();
 
-    public static void main(String[] args) { //TODO: schalter besser einbauen
+    public static void main(String[] args) {
 
         Game g = new GameImpl(s,b);
-        int i=2;
 
-        if(i==0){ // first mode
-            g.run();
-        } else if(i == 1){ // timer mode
-            g.render();
-            startGame(g);
-            inputTimer(g);
-        }else if(i == 2){
-            Application.launch(args); // javafx mode
+        switch(args[0]){
+            case "old":
+                g.run();
+                break;
+            case "fps":
+                g.render();
+                startGame(g);
+                inputTimer(g);
+                break;
+            case "gui":
+                Application.launch(args);
+                break;
         }
     }
 

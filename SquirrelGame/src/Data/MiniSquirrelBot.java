@@ -24,7 +24,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
     }
 
-    public void impolde(){ //TODO: interface implementierung????
+    public void impolde(){
         double impactArea = impactRadius*impactRadius*PI;
         LinkedList<Entity> surrounding = new LinkedList<>();
         int index = 0;

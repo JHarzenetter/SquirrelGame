@@ -16,7 +16,7 @@ public interface ControllerContext {
 
     void move(MoveDirection direction);
     void spawnMiniBot(XY direction,int energy);
-    void implode(int impactRadius);
+    void implode(int impactRadius) throws Exception;
 
     default void shout(String s) {}
 

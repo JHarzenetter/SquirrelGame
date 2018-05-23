@@ -54,6 +54,11 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
+        public void implode(int impactRadius) throws Exception {
+            throw new Exception();
+        }
+
+        @Override
         public int getEnergy() {
             return bot.getEnergy();
         }
