@@ -16,7 +16,7 @@ public class BadBeast extends Character {
     }
 
     public String toString(){
-        return ("Type: BadBeast " +super.toString());
+        return ("Type: BAD_BEAST " +super.toString());
     }
 
     @Override

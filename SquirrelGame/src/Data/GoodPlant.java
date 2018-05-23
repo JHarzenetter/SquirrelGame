@@ -7,6 +7,6 @@ public class GoodPlant extends Entity {
     }
 
     public String toString(){
-        return ("Type: GoodPlant " +super.toString());
+        return ("Type: GOOD_PLANT " +super.toString());
     }
 }

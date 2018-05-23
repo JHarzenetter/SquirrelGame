@@ -8,7 +8,7 @@ public class Board{
     private XY size;
     private Random rand = new Random();
     private int count = 0;
-    //ID's: 0 = Wand , 1 = BadBeast , 2 = GoodBeast , 3 = BadPlant , 4 = GoodPlant , 5 = MasterS , 6 = MiniS
+    //ID's: 0 = Wand , 1 = BAD_BEAST , 2 = GoodBeast , 3 = BAD_PLANT , 4 = GOOD_PLANT , 5 = MasterS , 6 = MiniS
 
     public Board(BoardConfig bc){
         board = new Entity[bc.getAmountOfEntities()];

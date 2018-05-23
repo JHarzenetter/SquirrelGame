@@ -26,12 +26,12 @@ public class MasterSquirrelBot extends MasterSquirrel{
 
         @Override
         public XY getViewLowerLeft() { // eckpunkte des sichtbereichs
-            return null;
+            return new XY(bot.getPlace().getX()-15,bot.getPlace().getY()+15);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return null;
+            return new XY(bot.getPlace().getX()+15,bot.getPlace().getY()-15);
         }
 
         @Override

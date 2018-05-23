@@ -14,7 +14,7 @@ public class MiniSquirrel extends Squirrel{
     }
 
     public String toString(){
-        return ("Type: MiniSquirrel " +super.toString());
+        return ("Type: MINI_SQUIRREL " +super.toString());
     }
 
     @Override
