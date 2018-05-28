@@ -10,7 +10,6 @@ public class Launcher extends Application {
 
     private static Timer timerGame = new Timer();
     private static Timer timerInput = new Timer();
-    private static String version = "";
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
     static State s = new State(b);

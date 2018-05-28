@@ -9,14 +9,12 @@ import static java.lang.Math.PI;
 
 public class MiniSquirrelBot extends MiniSquirrel{
 
-    private MiniSquirrelBot mini;
+    private final int viewSize = 10;
     private ControllerContextImplMini contextImplMini;
-    private int impactRadius;
 
-    protected MiniSquirrelBot(int energy, int x, int y , MasterSquirrel masterSquirrel , EntityContext context, MiniSquirrelBot mini) {
+    protected MiniSquirrelBot(int energy, int x, int y , MasterSquirrel masterSquirrel , EntityContext context) {
         super(energy, x, y,masterSquirrel);
-        this.mini = mini;
-        contextImplMini = new ControllerContextImplMini(context);
+        contextImplMini = new ControllerContextImplMini(context,this);
     }
 
     @Override
@@ -24,14 +22,14 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
     }
 
-    public void impolde(){
+    public void implode(int impactRadius){
         double impactArea = impactRadius*impactRadius*PI;
         LinkedList<Entity> surrounding = new LinkedList<>();
         int index = 0;
         int sum = 0;
 
-        for (int i = 0;i <= mini.getPlace().getX() + impactRadius; i++) {
-            for (int j = 1;j <=mini.getPlace().getY() + impactRadius; j++) {
+        for (int i = 0;i <= getPlace().getX() + impactRadius; i++) {
+            for (int j = 1;j <= getPlace().getY() + impactRadius; j++) {
                 surrounding.add(index,contextImplMini.getEntity(new XY(i,j)));
                 index++;
             }
@@ -91,19 +89,31 @@ public class MiniSquirrelBot extends MiniSquirrel{
     private class ControllerContextImplMini implements ControllerContext {
 
         private EntityContext context;
+        private MiniSquirrelBot mini;
 
-        ControllerContextImplMini(EntityContext context){
+        ControllerContextImplMini(EntityContext context,MiniSquirrelBot mini){
             this.context = context;
+            this.mini = mini;
         }
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(mini.getPlace().getX()-10, mini.getPlace().getY()+10);
+            return new XY(mini.getPlace().getX()-viewSize, mini.getPlace().getY()+viewSize);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(mini.getPlace().getX()+10, mini.getPlace().getY()-10);
+            return new XY(mini.getPlace().getX()+viewSize, mini.getPlace().getY()-viewSize);
+        }
+
+        @Override
+        public XY locate() {
+            return null;
+        }
+
+        @Override
+        public XY directionOfMaster() {
+            return null;
         }
 
         @Override
@@ -112,7 +122,9 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
-        public Entity getEntity(XY xy){return context.getEntity(xy);}
+        public Entity getEntity(XY xy){
+            return context.getEntity(xy);
+        }
 
         @Override
         public void move(MoveDirection direction) {
@@ -125,8 +137,23 @@ public class MiniSquirrelBot extends MiniSquirrel{
         }
 
         @Override
+        public void implode(int impactRadius){
+            mini.implode(impactRadius);
+        }
+
+        @Override
         public int getEnergy() {
-            return getEnergy();
+            return mini.getEnergy();
+        }
+
+        @Override
+        public long getRemainingSteps() {
+            return 0;
+        }
+
+        @Override
+        public boolean isMine(XY xy) {
+            return false;
         }
     }
 }

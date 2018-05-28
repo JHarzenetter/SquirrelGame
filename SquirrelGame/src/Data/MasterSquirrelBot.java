@@ -5,8 +5,12 @@ import UI.MoveDirection;
 
 public class MasterSquirrelBot extends MasterSquirrel{
 
-    protected MasterSquirrelBot(int x, int y) {
+    private ControllerContextImplMaster context;
+    private final int viewSize = 15;
+
+    protected MasterSquirrelBot(int x, int y, EntityContext context) {
         super(x, y);
+        this.context = new ControllerContextImplMaster(this,context);
     }
 
     @Override
@@ -25,18 +29,33 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public XY getViewLowerLeft() { // eckpunkte des sichtbereichs
-            return new XY(bot.getPlace().getX()-15,bot.getPlace().getY()+15);
+        public XY getViewLowerLeft() {
+            return new XY(bot.getPlace().getX()-viewSize,bot.getPlace().getY()+viewSize);
         }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(bot.getPlace().getX()+15,bot.getPlace().getY()-15);
+            return new XY(bot.getPlace().getX()+viewSize,bot.getPlace().getY()-viewSize);
+        }
+
+        @Override
+        public XY locate() {
+            return null;
+        }
+
+        @Override
+        public XY directionOfMaster() {
+            return bot.getPlace();
         }
 
         @Override
         public EntityType getEntityAt(XY xy) {
             return context.getEntityType(xy);
+        }
+
+        @Override
+        public Entity getEntity(XY xy) {
+            return null;
         }
 
         @Override
@@ -61,6 +80,16 @@ public class MasterSquirrelBot extends MasterSquirrel{
         @Override
         public int getEnergy() {
             return bot.getEnergy();
+        }
+
+        @Override
+        public long getRemainingSteps() {
+            return 0;
+        }
+
+        @Override
+        public boolean isMine(XY xy) {
+            return checkEntitie(getEntity(xy));
         }
     }
 }

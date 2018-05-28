@@ -23,15 +23,19 @@ public final class XY {
     public XY plus(XY xy){
         return null;
     }
+
     public XY minus(XY xy){
         return null;
     }
+
     public XY times(int factor){
         return null;
     }
+
     public double length(){
         return 0;
     }
+
     public double distanceFrom(XY xy){
         int dx = x - xy.getX();
         int dy = y - xy.getY();
