@@ -5,11 +5,13 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 public class Launcher extends Application {
 
     private static Timer timerGame = new Timer();
     private static Timer timerInput = new Timer();
+    private static Logger logger = Logger.getLogger("Launcher");
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
     static State s = new State(b);
@@ -20,14 +22,17 @@ public class Launcher extends Application {
 
         switch(args[0]){
             case "old":
+                logger.info("Version: old!");
                 g.run();
                 break;
             case "fps":
+                logger.info("Version: fps!");
                 g.render();
                 startGame(g);
                 inputTimer(g);
                 break;
             case "gui":
+                logger.info("Version: gui!");
                 Application.launch(args);
                 break;
         }
