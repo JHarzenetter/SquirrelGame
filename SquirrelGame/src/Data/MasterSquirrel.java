@@ -25,11 +25,11 @@ public abstract class MasterSquirrel extends Squirrel {
         }
     }
 
-    public MiniSquirrel createMini(XY direction , int energy){
-        logger.info("MINI_SQUIRREL spawned");
+    public MiniSquirrel createMiniBot(XY direction , int energy, EntityContext context){
+        logger.info("MINI_SQUIRREL_BOT spawned");
         try{
-            if(energy>=100 && energy<=this.getEnergy()){
-                MiniSquirrel mini = new MiniSquirrel(energy, getPlace().getX() + direction.getX(), getPlace().getY() + direction.getY(), this);
+            if(energy >= 100 && energy <= getEnergy()){
+                MiniSquirrel mini = new MiniSquirrelBot(energy, getPlace().getX() + direction.getX(), getPlace().getY() + direction.getY(), this, context );
                 updateEnergy(-energy);
                 return mini;
             } else {

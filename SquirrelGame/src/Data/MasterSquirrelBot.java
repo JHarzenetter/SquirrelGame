@@ -1,21 +1,31 @@
 package Data;
 
+import BotAPI.BotController;
+import BotAPI.BotControllerFactory;
 import BotAPI.ControllerContext;
 import UI.MoveDirection;
 
 public class MasterSquirrelBot extends MasterSquirrel{
 
-    private ControllerContextImplMaster context;
+    private BotController controller;
     private final int viewSize = 15;
 
-    protected MasterSquirrelBot(int x, int y, EntityContext context) {
+    protected MasterSquirrelBot(int x, int y, BotControllerFactory factory) {
         super(x, y);
-        this.context = new ControllerContextImplMaster(this,context);
+        controller = factory.createMasterBotController();
     }
 
     @Override
     public void nextStep(EntityContext context) {
-
+        if(getWait() > 0){
+            setWait(getWait()-100);
+        } else {
+            controller.nextStep(new ControllerContextImplMaster(this,context));
+            context.tryToMove(this , getMD().getDirection());
+        }
+        if(getEnergy() < 0){
+            updateEnergy(-getEnergy());
+        }
     }
 
     private class ControllerContextImplMaster implements ControllerContext {
@@ -55,7 +65,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
 
         @Override
         public Entity getEntity(XY xy) {
-            return null;
+            return context.getEntity(xy);
         }
 
         @Override
@@ -69,7 +79,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
 
         @Override
         public void spawnMiniBot(XY direction, int energy) {
-            context.getBoard().addEntity(bot.createMini(direction,energy));
+            context.getBoard().addEntity(bot.createMiniBot(direction,energy,context));
         }
 
         @Override

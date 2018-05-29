@@ -1,5 +1,7 @@
 package Data;
 
+import BotAPI.Factory;
+
 import java.util.Random;
 
 public class Board{
@@ -8,11 +10,12 @@ public class Board{
     private XY size;
     private Random rand = new Random();
     private int count = 0;
+    private int players = 0;
     //ID's: 0 = Wand , 1 = BAD_BEAST , 2 = GoodBeast , 3 = BAD_PLANT , 4 = GOOD_PLANT , 5 = MasterS , 6 = MiniS
 
     public Board(BoardConfig bc){
         board = new Entity[bc.getAmountOfEntities()];
-        size = new XY(bc.getLength(),bc.getHeight());
+        size = bc.getSize();
         XY [] xy = getRandXY(bc);
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
             board[count] = new BadBeast(xy[count].getX(),xy[count].getY());
@@ -34,7 +37,16 @@ public class Board{
             board[count] = new Wall(xy[count].getX(),xy[count].getY());
             count++;
         }
-
+        for(int i = 0; i<bc.getAmountOfHandOperated(); i++){
+            board[count] = new HandOperatedMasterSquirrel(xy[count].getX(), xy[count].getY());
+            players++;
+            count++;
+        }
+        for(int i=0; i<bc.getAmountOfBots(); i++){
+            board[count] = new MasterSquirrelBot(xy[count].getX(), xy[count].getY(), new Factory());
+            players++;
+            count++;
+        }
         for(int i=0; i<size.getX(); i++){
             for(int k=0; k<size.getY(); k++){
                 if(i >=1 && k>=1 && i<size.getX()-1 && k<size.getY()-1){
@@ -45,9 +57,6 @@ public class Board{
                 }
             }
         }
-
-        board[count] = new HandOperatedMasterSquirrel(xy[count].getX(), xy[count].getY()/*Y*/);
-        count++;
     }
 
     private XY[] getRandXY(BoardConfig bc){
@@ -82,13 +91,18 @@ public class Board{
         return new FlattenedBoard(flattendBoard,this);
     }
 
-    public MasterSquirrel getPlayer(){
+    public MasterSquirrel[] getPlayer(){
+
+        int c=0;
+        MasterSquirrel[] player = new MasterSquirrel[players];
+
         for(int i=0; i<board.length-1; i++){
             if (board[i] instanceof MasterSquirrel){
-                return (MasterSquirrel) board[i];
+                player[c] = (MasterSquirrel) board[i];
+                c++;
             }
         }
-        return null;
+        return player;
     }
 
     public void removeEntity(Entity e){

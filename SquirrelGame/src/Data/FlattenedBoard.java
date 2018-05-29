@@ -1,16 +1,16 @@
 package Data;
 
+import Logs.SquirrelLogger;
 import UI.MoveDirection;
 
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FlattenedBoard  implements BoardView, EntityContext{
 
     private Board b;
     private Entity[][] fb;
     private XY size;
-    private static Logger logger = Logger.getLogger("BoardLogger");
+    private static SquirrelLogger logger = new SquirrelLogger();
 
     public FlattenedBoard(Entity[][] fb, Board b) {
         this.fb = fb;
@@ -58,14 +58,14 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             case NONE:
                 break;
             case WALL:
-                logger.log(Level.WARNING,"MASTER_SQUIRREL collides with WALL");
+                logger.log.log(Level.WARNING,"MASTER_SQUIRREL collides with WALL");
                 masterSquirrel.setWait(300);
                 masterSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 return;
             case GOOD_PLANT:
             case GOOD_BEAST:
             case BAD_PLANT:
-                logger.info("Respawn from eatable initiated");
+                logger.log.info("Respawn from eatable initiated");
                 masterSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 killAndReplace(fb[moveTry.getX()][moveTry.getY()]);
                 return;
@@ -74,7 +74,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             case MINI_SQUIRREL:
                 break;
             case BAD_BEAST:
-                logger.warning("MASTER_SQUIRREL got bitten");
+                logger.log.warning("MASTER_SQUIRREL got bitten");
                 ((BadBeast)fb[moveTry.getX()][moveTry.getY()]).bite(masterSquirrel);
                 return;
         }
@@ -94,7 +94,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 kill(miniSquirrel);
                 return;
             case WALL:
-                logger.warning("MINI_SQUIRREL collides with WALL");
+                logger.log.warning("MINI_SQUIRREL collides with WALL");
                 miniSquirrel.setWait(300);
                 miniSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 return;
@@ -103,12 +103,12 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             case GOOD_BEAST:
             case GOOD_PLANT:
             case BAD_PLANT:
-                logger.info("Respawn from eatable initiated");
+                logger.log.info("Respawn from eatable initiated");
                 miniSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 killAndReplace(fb[moveTry.getX()][moveTry.getY()]);
                 break;
             case BAD_BEAST:
-                logger.warning("MINI_SQUIRREL got bitten");
+                logger.log.warning("MINI_SQUIRREL got bitten");
                 miniSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 ((BadBeast)fb[moveTry.getX()][moveTry.getY()]).bite(miniSquirrel);
                 return;

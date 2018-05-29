@@ -1,17 +1,19 @@
 package UI;
 
 import Data.*;
+import Logs.SquirrelLogger;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Logger;
 
 public class Launcher extends Application {
 
     private static Timer timerGame = new Timer();
     private static Timer timerInput = new Timer();
-    private static Logger logger = Logger.getLogger("Launcher");
+    private static SquirrelLogger logger = new SquirrelLogger();
+    static String version = "";
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
     static State s = new State(b);
@@ -22,17 +24,22 @@ public class Launcher extends Application {
 
         switch(args[0]){
             case "old":
-                logger.info("Version: old!");
+                logger.log.info("OLD Version");
                 g.run();
                 break;
             case "fps":
-                logger.info("Version: fps!");
+                logger.log.info("FPS Version");
                 g.render();
                 startGame(g);
                 inputTimer(g);
                 break;
+            case "bot":
+                version = "bot";
+                logger.log.info("BOT Version");
+                Application.launch(args);
+                break;
             case "gui":
-                logger.info("Version: gui!");
+                logger.log.info("GUI Version");
                 Application.launch(args);
                 break;
         }
@@ -62,9 +69,19 @@ public class Launcher extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        BoardConfig boardConfig = new BoardConfig();
-        FxUI fxUI = FxUI.createInstance(boardConfig.getSize());
-        final Game game = new GameImplFxUI(s,b,fxUI);
+        if(version.equals("bot")){
+            b = new Board(new BoardConfig(3,0));
+            s = new State(b);
+        }
+
+        FxUI fxUI = FxUI.createInstance(b.getSize());
+        final Game game;
+
+        if(version.equals("bot")){
+            game = new GameImplBots(s,b,fxUI);
+        } else {
+            game = new GameImplFxUI(s,b,fxUI);
+        }
 
         primaryStage.setScene(fxUI);
         primaryStage.setTitle("Diligent Squirrel");

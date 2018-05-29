@@ -24,6 +24,5 @@ public interface ControllerContext {
     long getRemainingSteps();
     boolean isMine(XY xy);
 
-    //TODO: Fragen: Proxy einbindung?
-    //TODO: Bot KI schreiben!
+    //TODO: Fragen: Proxy einbindung , VL unter Patterns zu finden!
 }

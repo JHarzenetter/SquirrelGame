@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 public class GameImpl extends Game {
 
     private FlattenedBoard fb;
-    private MasterSquirrel player;
+    private MasterSquirrel[] player;
     private Command c;
     private PrintStream printer = System.out;
 
@@ -69,17 +69,17 @@ public class GameImpl extends Game {
     }
 
     private void playerengery(){
-        printer.println(player.getEnergy());
+        printer.println(player[0].getEnergy());
     }
 
     private void move(){
-        player.setMoveDirection(MoveDirection.valueOf(c.getCommandTypeInfo().getName()));
+        player[0].setMoveDirection(MoveDirection.valueOf(c.getCommandTypeInfo().getName()));
     }
 
     private void minispawn(Integer i){
-        if(player.createMini(i) != null){
-            board.addEntity(player.createMini(i));
-            player.setMoveDirection(MoveDirection.none);
+        if(player[0].createMini(i) != null){
+            board.addEntity(player[0].createMini(i));
+            player[0].setMoveDirection(MoveDirection.none);
         }
     }
 }
