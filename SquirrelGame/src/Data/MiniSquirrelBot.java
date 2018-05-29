@@ -22,7 +22,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
     }
 
-    public void implode(int impactRadius){
+    public void implode(int impactRadius){ //TODO: bedingung abfangen
         double impactArea = impactRadius*impactRadius*PI;
         LinkedList<Entity> surrounding = new LinkedList<>();
         int index = 0;
@@ -43,7 +43,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
             int energyLoss = (int) (200*(getEnergy()/impactArea)*(1-distance/impactRadius));
 
-            switch (eA[i].getID()){
+            switch (eA[i].getID()){ //TODO: controllerContext umlagern und anstatt ID entityType nutzen
                 case 0: //W
                     break;
                 case 1: //BB
@@ -115,7 +115,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
         @Override
         public XY directionOfMaster() {
             return null;
-        }
+        } //TODO: achtung NUR himmelsrichtung
 
         @Override
         public EntityType getEntityAt(XY xy) {

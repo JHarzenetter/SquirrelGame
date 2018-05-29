@@ -22,7 +22,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
             setWait(getWait()-100);
         } else {
             ControllerContext contextImplMaster = new ControllerContextImplMaster(this,context);
-            controller.nextStep(new ControllerContextProxy(contextImplMaster,false).proxy()); // controllercontextimpl durch proxy ersetzten
+            controller.nextStep(new ControllerContextProxy(contextImplMaster,false).proxy());
             context.tryToMove(this , getMD().getDirection());
         }
         if(getEnergy() < 0){
@@ -43,7 +43,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
         @Override
         public XY getViewLowerLeft() {
             return new XY(bot.getPlace().getX()-viewSize,bot.getPlace().getY()+viewSize);
-        }
+        } // TODO: spielfeld begrenzung beachten (mini auch)
 
         @Override
         public XY getViewUpperRight() {
@@ -71,7 +71,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public void move(MoveDirection direction) {
+        public void move(MoveDirection direction) { // TODO: tryMove einfügen
             if (direction.getDirection().getX() - bot.getPlace().getX() <= 1 && direction.getDirection().getY() - bot.getPlace().getY() <= 1) {
                 bot.setMoveDirection(direction);
             } else {
@@ -85,7 +85,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public void implode(int impactRadius) throws Exception {
+        public void implode(int impactRadius) throws Exception { //TODO: runtime exception!
             throw new Exception();
         }
 
