@@ -5,13 +5,12 @@ public class BadBeast extends Character {
     private int bites;
 
     public BadBeast(int x, int y) {
-        super(1, -1050, x, y);
+        super(1, -150, x, y);
         bites = 0;
     }
 
     public void bite(Entity e){
         e.updateEnergy(getEnergy());
-        updateEnergy(-150);
         bites++;
         System.out.println("bites = " +bites);
     }
@@ -22,7 +21,7 @@ public class BadBeast extends Character {
 
     @Override
     public void nextStep(EntityContext context) {
-        if(getEnergy() <= 0){
+        if(bites == 7){
             context.killAndReplace(this);
         } else if(getWait() > 0){
             setWait(getWait()-100);

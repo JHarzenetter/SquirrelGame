@@ -3,6 +3,7 @@ package Data;
 import BotAPI.BotController;
 import BotAPI.BotControllerFactory;
 import BotAPI.ControllerContext;
+import Logs.ControllerContextProxy;
 import UI.MoveDirection;
 
 public class MasterSquirrelBot extends MasterSquirrel{
@@ -20,7 +21,8 @@ public class MasterSquirrelBot extends MasterSquirrel{
         if(getWait() > 0){
             setWait(getWait()-100);
         } else {
-            controller.nextStep(new ControllerContextImplMaster(this,context));
+            ControllerContext contextImplMaster = new ControllerContextImplMaster(this,context);
+            controller.nextStep(new ControllerContextProxy(contextImplMaster,false).proxy()); // controllercontextimpl durch proxy ersetzten
             context.tryToMove(this , getMD().getDirection());
         }
         if(getEnergy() < 0){
@@ -55,7 +57,7 @@ public class MasterSquirrelBot extends MasterSquirrel{
 
         @Override
         public XY directionOfMaster() {
-            return bot.getPlace();
+            return null;
         }
 
         @Override

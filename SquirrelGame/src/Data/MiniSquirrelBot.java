@@ -77,6 +77,7 @@ public class MiniSquirrelBot extends MiniSquirrel{
                     if(eA[i] == master){
                         break;
                     } else {
+                        eA[i].updateEnergy(-energyLoss);
                         break;
                     }
                 default:

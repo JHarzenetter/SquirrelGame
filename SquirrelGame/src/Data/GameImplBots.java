@@ -4,7 +4,7 @@ import UI.FxUI;
 
 public class GameImplBots extends Game {
 
-    private MasterSquirrel player[];
+    private MasterSquirrel[] player;
 
     public GameImplBots(State state, Board board, FxUI fxUI) {
         super(state, board);

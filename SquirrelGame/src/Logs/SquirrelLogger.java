@@ -7,18 +7,18 @@ import java.util.logging.SimpleFormatter;
 
 public class SquirrelLogger {
 
-    public static Logger log;
+    public static Logger log = Logger.getLogger("Logger");
     FileHandler fh;
 
     public SquirrelLogger(){
-        log = Logger.getLogger("Logger");
         try {
-            fh = new FileHandler("C:\\SquirrelLogs\\LogFile.txt"); // WHY NOT WORKING?
+            fh = new FileHandler("C:\\SquirrelLogs\\LogFile.txt");
             log.addHandler(fh);
             fh.setFormatter(new SimpleFormatter());
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        log.setUseParentHandlers(false);
     }
 }

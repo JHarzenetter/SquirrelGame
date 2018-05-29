@@ -7,12 +7,13 @@ import javafx.stage.Stage;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Logger;
 
 public class Launcher extends Application {
 
     private static Timer timerGame = new Timer();
     private static Timer timerInput = new Timer();
-    private static SquirrelLogger logger = new SquirrelLogger();
+    private static Logger log = new SquirrelLogger().log;
     static String version = "";
     static BoardConfig bc = new BoardConfig();
     static Board b = new Board(bc);
@@ -24,22 +25,22 @@ public class Launcher extends Application {
 
         switch(args[0]){
             case "old":
-                logger.log.info("OLD Version");
+                log.info("OLD Version");
                 g.run();
                 break;
             case "fps":
-                logger.log.info("FPS Version");
+                log.info("FPS Version");
                 g.render();
                 startGame(g);
                 inputTimer(g);
                 break;
             case "bot":
                 version = "bot";
-                logger.log.info("BOT Version");
+                log.info("BOT Version");
                 Application.launch(args);
                 break;
             case "gui":
-                logger.log.info("GUI Version");
+                log.info("GUI Version");
                 Application.launch(args);
                 break;
         }

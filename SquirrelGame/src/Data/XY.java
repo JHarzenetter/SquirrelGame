@@ -21,11 +21,11 @@ public final class XY {
     }
     //TODO: implement methods
     public XY plus(XY xy){
-        return null;
+        return new XY(x+xy.getX(),y+xy.getY());
     }
 
     public XY minus(XY xy){
-        return null;
+        return new XY(x-xy.getX(),y-xy.getY());
     }
 
     public XY times(int factor){
