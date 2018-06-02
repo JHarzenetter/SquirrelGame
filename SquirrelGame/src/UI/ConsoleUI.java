@@ -35,7 +35,7 @@ public class ConsoleUI implements UserInterface{
     }
 
     public void render(BoardView view){
-         String s = "";
+        String s = "";
         for(int i = 0; i< view.getSize().getY(); i++){
             for(int k = 0; k< view.getSize().getX(); k++){
                 s += view.getEntityType(new XY(k,i)).getWert();

@@ -57,7 +57,7 @@ public class FxUI extends Scene implements UserInterface {
                         setCommand("RIGHT");
                         break;
                     default:
-                        setCommand("NONE");
+                        setCommand("ZERO_ZERO");
                         break;
                 }
             }
@@ -120,7 +120,7 @@ public class FxUI extends Scene implements UserInterface {
                         gc.setFill(Color.ORANGE);
                         gc.fillRect(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case NONE:
+                    case ZERO_ZERO:
                         break;
                 }
             }

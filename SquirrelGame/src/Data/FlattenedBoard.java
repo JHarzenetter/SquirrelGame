@@ -31,7 +31,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             return EntityType.MASTER_SQUIRREL;
         if(fb[xy.getX()][xy.getY()] instanceof Wall)
             return EntityType.WALL;
-        return EntityType.NONE;
+        return EntityType.ZERO_ZERO;
 
     }
 
@@ -53,7 +53,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             return;
         }
         switch(getEntityType(moveTry)) {
-            case NONE:
+            case ZERO_ZERO:
                 break;
             case WALL:
                 log.log(Level.WARNING,"MASTER_SQUIRREL collides with WALL");
@@ -96,7 +96,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 miniSquirrel.setWait(300);
                 miniSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 return;
-            case NONE:
+            case ZERO_ZERO:
                 break;
             case GOOD_BEAST:
             case GOOD_PLANT:
@@ -119,7 +119,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         XY moveTry = new XY (badBeast.getPlace().getX()+direction.getX(),badBeast.getPlace().getY()+direction.getY());
 
         switch (getEntityType(moveTry)){
-            case NONE:
+            case ZERO_ZERO:
                 break;
             case BAD_PLANT:
             case BAD_BEAST:
@@ -139,7 +139,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         XY moveTry = new XY (goodBeast.getPlace().getX()+direction.getX(),goodBeast.getPlace().getY()+direction.getY());
 
         switch (getEntityType(moveTry)){
-            case NONE:
+            case ZERO_ZERO:
                 break;
             case BAD_PLANT:
             case BAD_BEAST:

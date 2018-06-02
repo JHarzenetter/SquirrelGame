@@ -22,6 +22,15 @@ public class BoardConfig{
         amountOfWall = 5;
     }
 
+    public BoardConfig(String s){
+        length = 22;
+        height = 22;
+        amountOfBadBeast = amountOfGoodBeast = amountOfBadPlant = amountOfGoodPlant = 0;
+        amountOfWall = 0;
+        amountOfBots = 0;
+        amountOfHandOperated = 0;
+    }
+
     public BoardConfig(int bots, int humans){
         length = 60;
         height = 40;
