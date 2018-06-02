@@ -1,21 +1,19 @@
 package Data;
 
-import UI.MoveDirection;
-
 public abstract class Character extends Entity{
 
     private int wait;
-    private MoveDirection moveDirection = MoveDirection.none;
+    private XY moveDirection = XY.ZERO_ZERO;
 
     protected Character(int pID, int pEnergy, int x, int y) {
         super(pID, pEnergy, x, y);
     }
 
-    public void setMoveDirection(MoveDirection moveDirection) {
+    public void setMoveDirection(XY moveDirection) {
         this.moveDirection = moveDirection;
     }
 
-    public MoveDirection getMD() {
+    public XY getMD() {
         return moveDirection;
     }
 

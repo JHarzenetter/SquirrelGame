@@ -8,7 +8,7 @@ public enum GameCommandType implements CommandTypeInfo {
     UP("up" , "move up" , "move"),
     DOWN("down" , "move down" , "move"),
     RIGHT("right" , "move right" , "move"),
-    NONE("none" , "dont move" , "move"),
+    ZERO_ZERO("zero_zero" , "dont move" , "move"),
     MASTER_ENERGY("master_energy" , "shows masters Energy" , "playerengery"),
     SPAWN_MINI("spawn_mini" , "spawns a minisquirrel , energy" , "minispawn" , int.class);
 

@@ -20,7 +20,7 @@ public class GoodBeast extends Character {
                 context.tryToMove(this, context.moveAway(this,context.nearestPlayerEntity(getPlace())));
                 setWait(400);
             } else{
-                context.tryToMove(this,context.getRandMoveDirection().getDirection());
+                context.tryToMove(this,context.getRandMoveDirection());
                 setWait(400);
             }
         }

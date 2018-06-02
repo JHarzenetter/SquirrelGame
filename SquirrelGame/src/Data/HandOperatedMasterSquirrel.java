@@ -1,7 +1,5 @@
 package Data;
 
-import UI.MoveDirection;
-
 public class HandOperatedMasterSquirrel extends MasterSquirrel{
 
     public HandOperatedMasterSquirrel(int x, int y) {
@@ -14,8 +12,8 @@ public class HandOperatedMasterSquirrel extends MasterSquirrel{
             System.out.println("Stunned for "+getWait()+" rounds");
             setWait(getWait()-100);
         } else {
-            context.tryToMove(this , getMD().getDirection());
-            setMoveDirection(MoveDirection.none);
+            context.tryToMove(this , getMD());
+            setMoveDirection(XY.ZERO_ZERO);
         }
         if(getEnergy() < 0){
             updateEnergy(-getEnergy());

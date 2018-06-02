@@ -31,7 +31,7 @@ public class BadBeast extends Character {
                 context.tryToMove(this, context.moveTo(this,context.nearestPlayerEntity(getPlace())));
                 setWait(400);
             } else{
-                context.tryToMove(this,context.getRandMoveDirection().getDirection());
+                context.tryToMove(this,context.getRandMoveDirection());
                 setWait(400);
             }
         }

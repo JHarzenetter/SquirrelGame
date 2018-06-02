@@ -1,7 +1,5 @@
 package Data;
 
-import UI.MoveDirection;
-
 public interface EntityContext {
 
     XY getSize();
@@ -20,5 +18,5 @@ public interface EntityContext {
 
     XY moveTo(BadBeast badBeast , Entity en);
     XY moveAway(GoodBeast goodBeast , Entity en);
-    MoveDirection getRandMoveDirection();
+    XY getRandMoveDirection();
 }

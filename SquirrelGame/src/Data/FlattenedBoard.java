@@ -1,7 +1,5 @@
 package Data;
 
-import UI.MoveDirection;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,7 +49,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
 
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
         XY moveTry = new XY (masterSquirrel.getPlace().getX()+direction.getX(),masterSquirrel.getPlace().getY()+direction.getY());
-        if(direction.equals(MoveDirection.none.getDirection())){
+        if(direction.equals(XY.ZERO_ZERO)){
             return;
         }
         switch(getEntityType(moveTry)) {
@@ -210,8 +208,8 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         return null;
     }
 
-    public MoveDirection getRandMoveDirection(){
-        return MoveDirection.getRandCommand();
+    public XY getRandMoveDirection(){
+        return XYsupport.getRandCommand();
     }
 
     public XY moveTo(BadBeast badBeast , Entity en){

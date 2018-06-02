@@ -19,7 +19,7 @@ public final class XY {
         this.x =x;
         this.y =y;
     }
-    //TODO: implement methods
+
     public XY plus(XY xy){
         return new XY(x+xy.getX(),y+xy.getY());
     }

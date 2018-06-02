@@ -4,7 +4,6 @@ import BotAPI.BotController;
 import BotAPI.BotControllerFactory;
 import BotAPI.ControllerContext;
 import Logs.ControllerContextProxy;
-import UI.MoveDirection;
 
 public class MasterSquirrelBot extends MasterSquirrel{
 
@@ -23,7 +22,6 @@ public class MasterSquirrelBot extends MasterSquirrel{
         } else {
             ControllerContext contextImplMaster = new ControllerContextImplMaster(this,context);
             controller.nextStep(new ControllerContextProxy(contextImplMaster,false).proxy());
-            context.tryToMove(this , getMD().getDirection());
         }
         if(getEnergy() < 0){
             updateEnergy(-getEnergy());
@@ -42,12 +40,28 @@ public class MasterSquirrelBot extends MasterSquirrel{
 
         @Override
         public XY getViewLowerLeft() {
-            return new XY(bot.getPlace().getX()-viewSize,bot.getPlace().getY()+viewSize);
-        } // TODO: spielfeld begrenzung beachten (mini auch)
+            if(bot.getPlace().getX()-viewSize >= 0 && bot.getPlace().getY()+viewSize <= context.getSize().getY()){
+                return new XY(bot.getPlace().getX()-viewSize,bot.getPlace().getY()+viewSize);
+            } else if(bot.getPlace().getX()-viewSize < 0 && bot.getPlace().getY()+viewSize <= context.getSize().getY()) {
+                return new XY(0,bot.getPlace().getY()+viewSize);
+            } else if(bot.getPlace().getY()+viewSize > context.getSize().getY() && bot.getPlace().getX()-viewSize >= 0){
+                return new XY(bot.getPlace().getX()-viewSize,context.getSize().getY());
+            } else {
+                return new XY(0,context.getSize().getY());
+            }
+        }
 
         @Override
         public XY getViewUpperRight() {
-            return new XY(bot.getPlace().getX()+viewSize,bot.getPlace().getY()-viewSize);
+            if(bot.getPlace().getY()-viewSize >= 0 && bot.getPlace().getX()+viewSize <= context.getSize().getX()){
+                return new XY(bot.getPlace().getX()+viewSize,bot.getPlace().getY()-viewSize);
+            } else if(bot.getPlace().getY()-viewSize < 0 && bot.getPlace().getX()+viewSize <= context.getSize().getX()) {
+                return new XY(bot.getPlace().getX()+viewSize,0);
+            } else if(bot.getPlace().getX()+viewSize > context.getSize().getX() && bot.getPlace().getY()-viewSize >= 0){
+                return new XY(context.getSize().getX(),bot.getPlace().getY()-viewSize);
+            } else {
+               return new XY(context.getSize().getX(),0);
+            }
         }
 
         @Override
@@ -71,11 +85,11 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public void move(MoveDirection direction) { // TODO: tryMove einfügen
-            if (direction.getDirection().getX() - bot.getPlace().getX() <= 1 && direction.getDirection().getY() - bot.getPlace().getY() <= 1) {
-                bot.setMoveDirection(direction);
+        public void move(XY direction) {
+            if (direction.getX() - bot.getPlace().getX() <= 1 && direction.getY() - bot.getPlace().getY() <= 1) {
+                context.tryToMove(bot,direction);
             } else {
-                bot.setMoveDirection(MoveDirection.none);
+                context.tryToMove(bot,XY.ZERO_ZERO);
             }
         }
 
@@ -85,8 +99,8 @@ public class MasterSquirrelBot extends MasterSquirrel{
         }
 
         @Override
-        public void implode(int impactRadius) throws Exception { //TODO: runtime exception!
-            throw new Exception();
+        public void implode(int impactRadius){
+            throw new RuntimeException("You are not allowed to implode!");
         }
 
         @Override

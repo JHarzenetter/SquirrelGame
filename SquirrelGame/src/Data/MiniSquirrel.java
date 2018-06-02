@@ -20,7 +20,7 @@ public class MiniSquirrel extends Squirrel{
     @Override
     public void nextStep(EntityContext context) {
         if(getWait() == 0){
-            context.tryToMove(this,context.getRandMoveDirection().getDirection());
+            context.tryToMove(this,context.getRandMoveDirection());
         } else {
             setWait(getWait()-100);
         }

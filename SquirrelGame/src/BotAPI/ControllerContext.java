@@ -3,7 +3,6 @@ package BotAPI;
 import Data.Entity;
 import Data.EntityType;
 import Data.XY;
-import UI.MoveDirection;
 
 public interface ControllerContext {
     XY getViewLowerLeft();
@@ -14,7 +13,7 @@ public interface ControllerContext {
     EntityType getEntityAt(XY xy);
     Entity getEntity(XY xy);
 
-    void move(MoveDirection direction);
+    void move(XY direction);
     void spawnMiniBot(XY direction,int energy);
     void implode(int impactRadius) throws Exception;
 
@@ -23,6 +22,4 @@ public interface ControllerContext {
     int getEnergy();
     long getRemainingSteps();
     boolean isMine(XY xy);
-
-    //TODO: Fragen: Proxy einbindung , VL unter Patterns zu finden!
 }

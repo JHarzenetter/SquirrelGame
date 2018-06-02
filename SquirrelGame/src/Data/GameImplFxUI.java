@@ -2,7 +2,7 @@ package Data;
 
 import Commands.Command;
 import UI.FxUI;
-import UI.MoveDirection;
+
 import java.io.PrintStream;
 
 public class GameImplFxUI extends Game{
@@ -25,15 +25,15 @@ public class GameImplFxUI extends Game{
 
     @Override
     public void processInput() {
-            while(true){
-                for(int i=0; i<player.length; i++){
-                    player[i].setMoveDirection(MoveDirection.valueOf(ui.getCommand().getCommandTypeInfo().getName()));
-                }
+        while(true){
+            for(int i=0; i<player.length; i++){
+                player[i].setMoveDirection(XYsupport.valueOf(ui.getCommand().getCommandTypeInfo().getName()));
             }
+        }
     }
 
     private void minispawn(Integer i){
         board.addEntity(player[0].createMini(i));
-        player[0].setMoveDirection(MoveDirection.none);
+        player[0].setMoveDirection(XY.ZERO_ZERO);
     }
 }

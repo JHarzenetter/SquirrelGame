@@ -27,7 +27,7 @@ public class FxUI extends Scene implements UserInterface {
         super(parent);
         this.boardCanvas = boardCanvas;
         this.msgLabel = msgLabel;
-        setCommand("NONE");
+        setCommand("ZERO_ZERO");
     }
 
     public static FxUI createInstance(XY boardSize) {

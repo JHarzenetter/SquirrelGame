@@ -12,10 +12,9 @@ public class SquirrelLogger {
 
     public SquirrelLogger(){
         try {
-            fh = new FileHandler("C:\\SquirrelLogs\\LogFile.txt"); // TODO: properties file auslagern (siehe skript)
+            fh = new FileHandler("C:\\SquirrelLogs\\LogFile.txt");
             log.addHandler(fh);
             fh.setFormatter(new SimpleFormatter());
-
         } catch (IOException e) {
             e.printStackTrace();
         }

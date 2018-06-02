@@ -3,8 +3,6 @@ package Data;
 import Commands.Command;
 import Commands.GameCommandType;
 import UI.ConsoleUI;
-import UI.MoveDirection;
-import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
@@ -73,13 +71,13 @@ public class GameImpl extends Game {
     }
 
     private void move(){
-        player[0].setMoveDirection(MoveDirection.valueOf(c.getCommandTypeInfo().getName()));
+        player[0].setMoveDirection(XYsupport.valueOf(c.getCommandTypeInfo().getName()));
     }
 
     private void minispawn(Integer i){
         if(player[0].createMini(i) != null){
             board.addEntity(player[0].createMini(i));
-            player[0].setMoveDirection(MoveDirection.none);
+            player[0].setMoveDirection(XY.ZERO_ZERO);
         }
     }
 }

@@ -1,11 +1,11 @@
 package BotAPI;
 
-import UI.MoveDirection;
+import Data.XYsupport;
 
 public class RndController implements BotController {
 
     @Override
     public void nextStep(ControllerContext view) {
-        view.move(MoveDirection.getRandCommand());
+        view.move(XYsupport.getRandCommand());
     }
 }
