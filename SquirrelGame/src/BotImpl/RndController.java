@@ -1,5 +1,7 @@
-package BotAPI;
+package BotImpl;
 
+import BotAPI.BotController;
+import BotAPI.ControllerContext;
 import Data.XYsupport;
 
 public class RndController implements BotController {

@@ -27,7 +27,7 @@ public class FxUI extends Scene implements UserInterface {
         super(parent);
         this.boardCanvas = boardCanvas;
         this.msgLabel = msgLabel;
-        setCommand("ZERO_ZERO");
+        setCommand("NONE");
     }
 
     public static FxUI createInstance(XY boardSize) {
@@ -57,7 +57,7 @@ public class FxUI extends Scene implements UserInterface {
                         setCommand("RIGHT");
                         break;
                     default:
-                        setCommand("ZERO_ZERO");
+                        setCommand("NONE");
                         break;
                 }
             }
@@ -120,7 +120,7 @@ public class FxUI extends Scene implements UserInterface {
                         gc.setFill(Color.ORANGE);
                         gc.fillRect(i*CELL_SIZE,k*CELL_SIZE,CELL_SIZE,CELL_SIZE);
                         break;
-                    case ZERO_ZERO:
+                    case NONE:
                         break;
                 }
             }

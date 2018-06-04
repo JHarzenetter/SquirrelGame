@@ -1,4 +1,7 @@
-package BotAPI;
+package BotImpl;
+
+import BotAPI.BotController;
+import BotAPI.BotControllerFactory;
 
 public class Factory implements BotControllerFactory {
 

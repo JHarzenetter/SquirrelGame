@@ -71,7 +71,7 @@ public class Launcher extends Application {
     public void start(Stage primaryStage) {
 
         if(version.equals("bot")){
-            b = new Board(new BoardConfig(3,0));
+            b = new Board(new BoardConfig("bot"));
             s = new State(b);
         }
 

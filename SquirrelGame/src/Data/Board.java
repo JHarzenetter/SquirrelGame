@@ -1,49 +1,57 @@
 package Data;
 
-import BotAPI.Factory;
+import BotAPI.BotControllerFactory;
+import Logs.SquirrelLogger;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 public class Board{
 
-    private Entity[] board;
+    private List<Entity> board;
+    private static Logger log = new SquirrelLogger().log;
     private XY size;
     private Random rand = new Random();
     private int count = 0;
     private int players = 0;
+    private long remainingSteps;
     //ID's: 0 = Wand , 1 = BAD_BEAST , 2 = GoodBeast , 3 = BAD_PLANT , 4 = GOOD_PLANT , 5 = MasterS , 6 = MiniS
 
     public Board(BoardConfig bc){
-        board = new Entity[bc.getAmountOfEntities()];
+        board = new LinkedList<>();
         size = bc.getSize();
         XY [] xy = getRandXY(bc);
+        remainingSteps = bc.getRemainingSteps();
         for(int i=0; i<bc.getAmountOfBadBeast(); i++){
-            board[count] = new BadBeast(xy[count].getX(),xy[count].getY());
+            board.add(new BadBeast(xy[count].getX(),xy[count].getY()));
             count++;
         }
         for(int i=0; i<bc.getAmountOfBadPlant(); i++){
-            board[count] = new BadPlant(xy[count].getX(),xy[count].getY());
+            board.add(new BadPlant(xy[count].getX(),xy[count].getY()));
             count++;
         }
         for(int i=0; i<bc.getAmountOfGoodBeast(); i++){
-            board[count] = new GoodBeast(xy[count].getX(),xy[count].getY());
+            board.add(new GoodBeast(xy[count].getX(),xy[count].getY()));
             count++;
         }
         for(int i=0; i<bc.getAmountOfGoodPlant(); i++){
-            board[count] = new GoodPlant(xy[count].getX(),xy[count].getY());
+            board.add(new GoodPlant(xy[count].getX(),xy[count].getY()));
             count++;
         }
         for(int i=0; i<bc.getAmountOfWall(); i++){
-            board[count] = new Wall(xy[count].getX(),xy[count].getY());
+            board.add(new Wall(xy[count].getX(),xy[count].getY()));
             count++;
         }
         for(int i = 0; i<bc.getAmountOfHandOperated(); i++){
-            board[count] = new HandOperatedMasterSquirrel(xy[count].getX(), xy[count].getY());
+            board.add(new HandOperatedMasterSquirrel(xy[count].getX(), xy[count].getY()));
             players++;
             count++;
         }
         for(int i=0; i<bc.getAmountOfBots(); i++){
-            board[count] = new MasterSquirrelBot(xy[count].getX(), xy[count].getY(), new Factory());
+            board.add(new MasterSquirrelBot(xy[count].getX(), xy[count].getY(), getNextFactory(bc.getBotNames()[i])));
             players++;
             count++;
         }
@@ -52,11 +60,23 @@ public class Board{
                 if(i >=1 && k>=1 && i<size.getX()-1 && k<size.getY()-1){
                 }
                 else {
-                    board[count] = new Wall(i,k);
+                    board.add(new Wall(i,k));
                     count++;
                 }
             }
         }
+        log.fine("Board created");
+    }
+
+    private BotControllerFactory getNextFactory(String s){
+        try {
+            Class factory = Class.forName("BotImpl." + s);
+            return (BotControllerFactory) factory.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        return null;
     }
 
     private XY[] getRandXY(BoardConfig bc){
@@ -84,21 +104,20 @@ public class Board{
     }
 
     public FlattenedBoard flattened(){
-        Entity[][] flattendBoard = new Entity[size.getX()][size.getY()];
-        for(int i=0; i<board.length-1; i++){
-            flattendBoard[board[i].getPlace().getX()][board[i].getPlace().getY()] = board[i];
+        Entity[][] flattenedBoard = new Entity[size.getX()][size.getY()];
+        for(Entity e : board){
+            flattenedBoard[e.getPlace().getX()][e.getPlace().getY()] = e;
         }
-        return new FlattenedBoard(flattendBoard,this);
+        return new FlattenedBoard(flattenedBoard,this);
     }
 
     public MasterSquirrel[] getPlayer(){
-
         int c=0;
         MasterSquirrel[] player = new MasterSquirrel[players];
 
-        for(int i=0; i<board.length-1; i++){
-            if (board[i] instanceof MasterSquirrel){
-                player[c] = (MasterSquirrel) board[i];
+        for(Entity e : board){
+            if (e instanceof MasterSquirrel){
+                player[c] = (MasterSquirrel) e;
                 c++;
             }
         }
@@ -106,56 +125,23 @@ public class Board{
     }
 
     public void removeEntity(Entity e){
-        Entity[] tboard = new Entity[board.length-1];
-        int k = 0;
-        for(int i=0; i<board.length-1 ; i++){
-            if(e.getPlace() == board[i].getPlace()) {
-                k = 1;
-            } else {
-                tboard[i-k] = board[i];
-            }
-        }
-        board = tboard;
-    }
-
-    public void addEntity(Entity e, int x, int y){
-        Entity[] tboard = board.clone();
-        board = new Entity[tboard.length+1];
-        for(int i=0; i<tboard.length-1; i++) {
-            board[i] = tboard[i];
-        }
-        if(e instanceof GoodPlant){
-            board[tboard.length-1] = new GoodPlant(x,y);
-            count++;
-        }
-        if(e instanceof BadPlant){
-            board[tboard.length-1] = new BadPlant(x,y);
-            count++;
-        }
-        if(e instanceof GoodBeast){
-            board[tboard.length-1] = new GoodBeast(x,y);
-            count++;
-        }
-        if(e instanceof BadBeast){
-            board[tboard.length-1] = new BadBeast(x,y);
-            count++;
-        }
+        board.remove(e);
     }
 
     public void addEntity(Entity e){
-        Entity[] tboard = board.clone();
-        board = new Entity[tboard.length+1];
-
-        for(int i=0; i<tboard.length-1; i++) {
-            board[i] = tboard[i];
-        }
-        board[tboard.length-1] = e;
-        count++;
+        board.add(e);
     }
 
-    public void killAndReplace(Entity e) {
-        removeEntity(e);
-        addEntity(e,rand.nextInt((size.getX()-2))+1, rand.nextInt((size.getY()-2))+1);
+    public void killAndReplace(Entity e, FlattenedBoard fb) {
+        XY xy;
+        do{
+            xy = new XY(rand.nextInt((size.getX()-2))+1,rand.nextInt((size.getY()-2))+1);
+        }while(fb.getEntityType(xy) == EntityType.NONE);
+        try {
+            board.set(board.indexOf(e),e.getClass().getDeclaredConstructor(int.class,int.class).newInstance(xy.getX(),xy.getY()));
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e1) {
+            e1.printStackTrace();
+        }
     }
 
     public XY getSize() {
@@ -163,19 +149,26 @@ public class Board{
     }
 
     public void update() {
-        for(int i=0; i<board.length-1; i++){
-            if(board[i] instanceof Character){
-                board[i].nextStep(flattened());
+        board.forEach(entity -> {
+            if(entity instanceof Character){
+                entity.nextStep(flattened());
             }
+        });
+        if(remainingSteps > 0){
+            remainingSteps--;
         }
+    }
+
+    public long getRemainingSteps(){
+        return remainingSteps;
     }
 
     @Override
     public String toString() {
         String s = "";
-        for(int i=0; i<board.length-1; i++){
-            if(!(board[i] instanceof Wall)) {
-                s+=board[i].toString();
+        for(Entity e : board){
+            if(!(e instanceof Wall)) {
+                s+=e.toString();
                 s+="\n";
             }
         }

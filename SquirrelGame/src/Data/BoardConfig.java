@@ -4,6 +4,8 @@ public class BoardConfig{
 
     private int length;
     private int height;
+    private long remainingSteps;
+    private String[] botNames;
     private int amountOfBots;
     private int amountOfHandOperated;
     private int amountOfBadBeast;
@@ -16,6 +18,7 @@ public class BoardConfig{
     public BoardConfig(){
         length = 60;
         height = 40;
+        remainingSteps = -1;
         amountOfBots = 0;
         amountOfHandOperated = 1;
         amountOfBadBeast = amountOfGoodBeast = amountOfBadPlant = amountOfGoodPlant = 4;
@@ -23,11 +26,13 @@ public class BoardConfig{
     }
 
     public BoardConfig(String s){
-        length = 22;
-        height = 22;
-        amountOfBadBeast = amountOfGoodBeast = amountOfBadPlant = amountOfGoodPlant = 0;
-        amountOfWall = 0;
-        amountOfBots = 0;
+        length = 60;
+        height = 40;
+        botNames = new String[]{"Factory","Factory2","Factory3"};
+        remainingSteps = 100;
+        amountOfBadBeast = amountOfGoodBeast = amountOfBadPlant = amountOfGoodPlant = 4;
+        amountOfWall = 10;
+        amountOfBots = botNames.length;
         amountOfHandOperated = 0;
     }
 
@@ -50,6 +55,12 @@ public class BoardConfig{
     public int getAmountOfBadPlant(){return amountOfBadPlant;}
     public int getAmountOfGoodPlant(){return amountOfGoodPlant;}
     public int getAmountOfWall(){return amountOfWall;}
+    public String[] getBotNames() {
+        return botNames;
+    }
+    public long getRemainingSteps() {
+        return remainingSteps;
+    }
     public int getAmountOfEntities(){return ((length+height)*2-4+amountOfHandOperated+amountOfBots+amountOfBadBeast+amountOfGoodBeast+amountOfBadPlant+amountOfGoodPlant+amountOfWall);}
 
 }
