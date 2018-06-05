@@ -69,6 +69,9 @@ public class FlattenedBoard  implements BoardView, EntityContext{
             case MASTER_SQUIRREL:
                 return;
             case MINI_SQUIRREL:
+                log.info("Eat MINI_SQUIRREL");
+                masterSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
+                kill(fb[moveTry.getX()][moveTry.getY()]);
                 break;
             case BAD_BEAST:
                 log.warning("MASTER_SQUIRREL got bitten");
