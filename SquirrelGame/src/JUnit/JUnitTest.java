@@ -11,9 +11,8 @@ public class JUnitTest extends TestCase {
 
     public void testXY(){
         XY xy = new XY(1,1);
-        XY xy2 = new XY(2,2);
-        assertTrue(xy2.equals(xy.plus(xy)));
-        assertTrue(xy.equals(xy2.minus(xy)));
+        assertTrue(xy.equals(XY.RIGHT_DOWN));
+        assertTrue(XY.ZERO_ZERO.equals(xy.minus(XY.RIGHT_DOWN)));
     }
 
     public void testCollisionWall(){
@@ -62,7 +61,31 @@ public class JUnitTest extends TestCase {
     }
 
     public void testCollisionGP(){
+        Board b = new Board(new BoardConfig("test"));
+        MasterSquirrel masterSquirrel = new HandOperatedMasterSquirrel(10,10);
+        GoodPlant w = new GoodPlant(masterSquirrel.getPlace().getX(),masterSquirrel.getPlace().getY()-1);
 
+        b.addEntity(w);
+        b.addEntity(masterSquirrel);
+
+        FlattenedBoard fb = b.flattened();
+
+        fb.tryToMove(masterSquirrel,XY.UP);
+        assertTrue(masterSquirrel.getPlace().equals(w.getPlace()));
+    }
+
+    public void testCollisionGB(){
+        Board b = new Board(new BoardConfig("test"));
+        MasterSquirrel masterSquirrel = new HandOperatedMasterSquirrel(10,10);
+        GoodBeast w = new GoodBeast(masterSquirrel.getPlace().getX(),masterSquirrel.getPlace().getY()-1);
+
+        b.addEntity(w);
+        b.addEntity(masterSquirrel);
+
+        FlattenedBoard fb = b.flattened();
+
+        fb.tryToMove(masterSquirrel,XY.UP);
+        assertTrue(masterSquirrel.getPlace().equals(w.getPlace()));
     }
 
     public void testStunned(){

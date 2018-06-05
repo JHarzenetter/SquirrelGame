@@ -65,7 +65,7 @@ public class FlattenedBoard  implements BoardView, EntityContext{
                 log.info("Respawn from eatable initiated");
                 masterSquirrel.updateEnergy(fb[moveTry.getX()][moveTry.getY()].getEnergy());
                 killAndReplace(fb[moveTry.getX()][moveTry.getY()]);
-                return;
+                break;
             case MASTER_SQUIRREL:
                 return;
             case MINI_SQUIRREL:
