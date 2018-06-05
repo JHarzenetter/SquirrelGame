@@ -26,8 +26,11 @@ public class JUnitTest extends TestCase {
         FlattenedBoard fb = b.flattened();
 
         XY sad = masterSquirrel.getPlace();
+        int energysafe = masterSquirrel.getEnergy();
+
         fb.tryToMove(masterSquirrel,XY.UP);
         assertTrue(masterSquirrel.getPlace().equals(sad));
+        assertTrue(masterSquirrel.getEnergy() < energysafe);
     }
 
     public void testCollisionBB(){
@@ -41,8 +44,11 @@ public class JUnitTest extends TestCase {
         FlattenedBoard fb = b.flattened();
 
         XY sad = masterSquirrel.getPlace();
+        int energysafe = masterSquirrel.getEnergy();
+
         fb.tryToMove(masterSquirrel,XY.UP);
         assertTrue(masterSquirrel.getPlace().equals(sad));
+        assertTrue(masterSquirrel.getEnergy() < energysafe);
     }
 
     public void testCollisionMaS(){
@@ -69,9 +75,11 @@ public class JUnitTest extends TestCase {
         b.addEntity(masterSquirrel);
 
         FlattenedBoard fb = b.flattened();
+        int energysafe = masterSquirrel.getEnergy();
 
         fb.tryToMove(masterSquirrel,XY.UP);
         assertTrue(masterSquirrel.getPlace().equals(w.getPlace()));
+        assertTrue(masterSquirrel.getEnergy() > energysafe);
     }
 
     public void testCollisionGB(){
@@ -83,9 +91,11 @@ public class JUnitTest extends TestCase {
         b.addEntity(masterSquirrel);
 
         FlattenedBoard fb = b.flattened();
+        int energysafe = masterSquirrel.getEnergy();
 
         fb.tryToMove(masterSquirrel,XY.UP);
         assertTrue(masterSquirrel.getPlace().equals(w.getPlace()));
+        assertTrue(masterSquirrel.getEnergy() > energysafe);
     }
 
     public void testStunned(){
