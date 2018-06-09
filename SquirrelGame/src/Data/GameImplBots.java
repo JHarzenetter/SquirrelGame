@@ -3,10 +3,8 @@ package Data;
 import Logs.SquirrelLogger;
 import UI.FxUI;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class GameImplBots extends Game {
@@ -41,7 +39,19 @@ public class GameImplBots extends Game {
 
     @Override
     public void safeHighscores(){
-
+        Properties properties = new Properties();
+        try{
+            for(String s : bc.getBotNames()){
+                properties.setProperty(s,highscores.get(s).toString());
+            }
+            FileOutputStream fout = new FileOutputStream("highscores.properties");
+            properties.store(fout,"Highscores");
+            fout.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

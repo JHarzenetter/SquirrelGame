@@ -94,6 +94,7 @@ public class Launcher extends Application {
         if(game instanceof GameImplBots){
             primaryStage.setOnCloseRequest(event -> {
                 game.safeHighscores();
+                System.exit(-1);
             });
         }
     }
