@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 public class GameImplBots extends Game {
 
     Map <String , List<Integer>> highscores;
+    File file;
+    Properties properties = new Properties();
     private static Logger log = new SquirrelLogger().log;
     private BoardConfig bc = new BoardConfig("bot");
 
@@ -19,6 +21,29 @@ public class GameImplBots extends Game {
         highscores = new HashMap();
         for(String s : bc.getBotNames()){
             highscores.put(s,new LinkedList<Integer>(){});
+        }
+
+        file = new File("Highscores.properties");
+        BufferedInputStream input;
+
+        try {
+            input = new BufferedInputStream(new FileInputStream(file));
+            properties.load(input);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(file.exists()){
+            for(String s : bc.getBotNames()){
+                String sla = (String) properties.get(s);
+                sla = sla.substring(1,sla.indexOf(']'));
+                String[] ts = sla.split(",");
+                for(int i=0; i<ts.length; i++){
+                    highscores.get(s).add(Integer.parseInt(ts[i].trim()));
+                }
+            }
         }
     }
 
@@ -39,13 +64,13 @@ public class GameImplBots extends Game {
 
     @Override
     public void safeHighscores(){
-        Properties properties = new Properties();
+        Properties prop = new Properties();
         try{
             for(String s : bc.getBotNames()){
-                properties.setProperty(s,highscores.get(s).toString());
+                prop.setProperty(s,highscores.get(s).toString());
             }
             FileOutputStream fout = new FileOutputStream("highscores.properties");
-            properties.store(fout,"Highscores");
+            prop.store(fout,"Highscores");
             fout.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
