@@ -4,12 +4,14 @@ import Logs.SquirrelLogger;
 import UI.FxUI;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
 public class GameImplBots extends Game {
 
-    Map <String , int[]> highscores;
+    Map <String , List<Integer>> highscores;
     private static Logger log = new SquirrelLogger().log;
     private BoardConfig bc = new BoardConfig("bot");
 
@@ -18,7 +20,7 @@ public class GameImplBots extends Game {
         ui = fxUI;
         highscores = new HashMap();
         for(String s : bc.getBotNames()){
-            highscores.put(s,new int[]{});
+            highscores.put(s,new LinkedList<Integer>(){});
         }
     }
 
@@ -29,17 +31,17 @@ public class GameImplBots extends Game {
         bc = new BoardConfig("bot");
         log.fine("Restart Initiated");
         for(int i=0; i<bc.getBotNames().length; i++){
-            int[] highscoreSafe = new int[highscores.get(bc.getBotNames()[i]).length+1];
-            for(int k=0; i<highscoreSafe.length-1; k++){
-                highscoreSafe[k] = highscores.get(bc.getBotNames()[i])[k];
-            }
-            highscoreSafe[highscoreSafe.length-1] = board.getPlayer()[i].getEnergy();
-            highscores.put(bc.getBotNames()[i],highscoreSafe);
+            highscores.get(bc.getBotNames()[i]).add(board.getPlayer()[i].getEnergy());
         }
         log.info(""+highscores);
         System.out.println(highscores);
         board = new Board(bc);
         state = new State(board);
+    }
+
+    @Override
+    public void safeHighscores(){
+
     }
 
     @Override

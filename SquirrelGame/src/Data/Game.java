@@ -27,4 +27,8 @@ public abstract class Game{
     public abstract void processInput();
 
     public void render(){ui.render(state.flattenedBoard());}
+
+    public void safeHighscores() {
+
+    }
 }
