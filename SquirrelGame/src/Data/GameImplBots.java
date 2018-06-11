@@ -30,7 +30,7 @@ public class GameImplBots extends Game {
             input = new BufferedInputStream(new FileInputStream(file));
             properties.load(input);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            log.fine("File was not found");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,6 +65,7 @@ public class GameImplBots extends Game {
     @Override
     public void safeHighscores(){
         Properties prop = new Properties();
+        log.fine("Highscores safed");
         try{
             for(String s : bc.getBotNames()){
                 prop.setProperty(s,highscores.get(s).toString());

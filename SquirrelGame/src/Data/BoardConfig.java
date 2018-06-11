@@ -23,7 +23,7 @@ public class BoardConfig {
 
     //21 + 40 + 40 + 49 + 49 = 199
     public BoardConfig() {
-        file = new File("BoardConfig.properties");
+        file = new File("C:/Users/johan/IdeaProjects/SquirrelGame/BoardConfig.properties");
         if (file.exists()) {
             try {
                 BufferedInputStream reader = new BufferedInputStream(new FileInputStream(file));
