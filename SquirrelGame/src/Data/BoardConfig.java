@@ -3,6 +3,9 @@ package Data;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * The Configuration Class for the Board in which holds the Information about the Number of Entities
+ */
 public class BoardConfig {
 
     private int length;

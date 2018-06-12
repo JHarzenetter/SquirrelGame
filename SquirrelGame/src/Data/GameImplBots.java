@@ -7,6 +7,9 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.Logger;
 
+/**
+ * The implementation for BotGameMode
+ */
 public class GameImplBots extends Game {
 
     Map <String , List<Integer>> highscores;

@@ -46,6 +46,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         return b;
     }
 
+    /**
+     * Move an MasterSquirrel and handle its Collisions
+     * @param masterSquirrel
+     * @param direction
+     */
     public void tryToMove(MasterSquirrel masterSquirrel , XY direction){
         XY moveTry = new XY (masterSquirrel.getPlace().getX()+direction.getX(),masterSquirrel.getPlace().getY()+direction.getY());
         if(direction.equals(XY.ZERO_ZERO)){
@@ -81,6 +86,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         masterSquirrel.setPlace(moveTry);
     } //collision ok
 
+    /**
+     * Move an MiniSquirrel and handle its Collisions
+     * @param miniSquirrel
+     * @param direction
+     */
     public void tryToMove(MiniSquirrel miniSquirrel , XY direction){
         XY moveTry = new XY (miniSquirrel.getPlace().getX()+direction.getX(),miniSquirrel.getPlace().getY()+direction.getY());
 
@@ -116,6 +126,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         miniSquirrel.setPlace(moveTry);
     } //collision ok
 
+    /**
+     * Move an BadBeast and handle its Collision
+     * @param badBeast
+     * @param direction
+     */
     public void tryToMove(BadBeast badBeast , XY direction){
 
         XY moveTry = new XY (badBeast.getPlace().getX()+direction.getX(),badBeast.getPlace().getY()+direction.getY());
@@ -137,6 +152,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         badBeast.setPlace(moveTry);
     } //collision ok
 
+    /**
+     * Move an GoodBeast and handle its Collision
+     * @param goodBeast
+     * @param direction
+     */
     public void tryToMove(GoodBeast goodBeast , XY direction){
         XY moveTry = new XY (goodBeast.getPlace().getX()+direction.getX(),goodBeast.getPlace().getY()+direction.getY());
 
@@ -158,6 +178,11 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         goodBeast.setPlace(moveTry);
     } //collision ok
 
+    /**
+     * Searches the nearest Squirrel around an Beast within Range of 6 Steps
+     * @param place
+     * @return
+     */
     @Override
     public Squirrel nearestPlayerEntity(XY place) {
         int step = 1;
@@ -214,6 +239,12 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         return XYsupport.getRandCommand();
     }
 
+    /**
+     * get an MoveDirection to the nearest Squirrel
+     * @param badBeast
+     * @param en
+     * @return
+     */
     public XY moveTo(BadBeast badBeast , Entity en){
         int x = 0;
         int y = 0;
@@ -232,6 +263,12 @@ public class FlattenedBoard  implements BoardView, EntityContext{
         return new XY(x,y);
     }
 
+    /**
+     * get an MoveDirection away from the nearest Squirrel
+     * @param goodBeast
+     * @param en
+     * @return
+     */
     public XY moveAway(GoodBeast goodBeast, Entity en){
         int x = 0;
         int y = 0;

@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
+/**
+ * The Board with all the knowledge about every Entity
+ */
 public class Board{
 
     private List<Entity> board;
@@ -20,6 +23,10 @@ public class Board{
     private long remainingSteps;
     //ID's: 0 = Wand , 1 = BAD_BEAST , 2 = GoodBeast , 3 = BAD_PLANT , 4 = GOOD_PLANT , 5 = MasterS , 6 = MiniS
 
+    /**
+     * Initialize the Board
+     * @param bc
+     */
     public Board(BoardConfig bc){
         board = new LinkedList<>();
         size = bc.getSize();
@@ -68,6 +75,11 @@ public class Board{
         log.fine("Board created");
     }
 
+    /**
+     * To create different BotController for each and every Bot.
+     * @param s
+     * @return
+     */
     private BotControllerFactory getNextFactory(String s){
         try {
             Class factory = Class.forName("BotImpl." + s);
@@ -79,6 +91,11 @@ public class Board{
         return null;
     }
 
+    /**
+     * Get random positions on the Board
+     * @param bc
+     * @return
+     */
     private XY[] getRandXY(BoardConfig bc){
         XY[] randXY = new XY[bc.getAmountOfEntities()];
         int count = 0;
@@ -103,6 +120,10 @@ public class Board{
         return randXY;
     }
 
+    /**
+     * Make a new FlattenedBoard to keep it up to date
+     * @return
+     */
     public FlattenedBoard flattened(){
         Entity[][] flattenedBoard = new Entity[size.getX()][size.getY()];
         for(Entity e : board){
@@ -111,6 +132,10 @@ public class Board{
         return new FlattenedBoard(flattenedBoard,this);
     }
 
+    /**
+     * Get a Player Array with the Number of Players
+     * @return
+     */
     public MasterSquirrel[] getPlayer(){
         int c=0;
         MasterSquirrel[] player = new MasterSquirrel[players];
@@ -132,6 +157,11 @@ public class Board{
         board.add(e);
     }
 
+    /**
+     * To kill an Entity and replace it on a Different Random position.
+     * @param e
+     * @param fb
+     */
     public void killAndReplace(Entity e, FlattenedBoard fb) {
         XY xy;
         do{

@@ -1,5 +1,8 @@
 package Data;
 
+/**
+ * A beast which hunts Squirrels
+ */
 public class BadBeast extends Character {
 
     private int bites;

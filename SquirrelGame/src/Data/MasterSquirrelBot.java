@@ -38,6 +38,10 @@ public class MasterSquirrelBot extends MasterSquirrel{
             this.context = context;
         }
 
+        /**
+         * get a View rectangle corner
+         * @return
+         */
         @Override
         public XY getViewLowerLeft() {
             if(bot.getPlace().getX()-viewSize >= 0 && bot.getPlace().getY()+viewSize <= context.getSize().getY()){
@@ -51,6 +55,10 @@ public class MasterSquirrelBot extends MasterSquirrel{
             }
         }
 
+        /**
+         * get a View rectangle corner
+         * @return
+         */
         @Override
         public XY getViewUpperRight() {
             if(bot.getPlace().getY()-viewSize >= 0 && bot.getPlace().getX()+viewSize <= context.getSize().getX()){

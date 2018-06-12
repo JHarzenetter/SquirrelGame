@@ -1,5 +1,8 @@
 package Data;
 
+/**
+ * The Class which is the Position of every Entity
+ */
 public final class XY {
 
     private final int x;

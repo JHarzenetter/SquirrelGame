@@ -1,5 +1,8 @@
 package Data;
 
+/**
+ * A beast which is shy and runs away from Squirrels
+ */
 public class GoodBeast extends Character {
 
     public GoodBeast(int x, int y) {

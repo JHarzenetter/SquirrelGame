@@ -10,6 +10,12 @@ public abstract class MasterSquirrel extends Squirrel {
         super(5 , 1000 , x,y);
     }
 
+    /**
+     * to Create an MiniSquirrel with a specific Energy
+     * @param energy
+     * @throws NotEnoughEnergyExeption occurs when energy is higher than MasterSquirrels Energy
+     * @return
+     */
     public MiniSquirrel createMini(int energy){
         logger.info("MINI_SQUIRREL spawned");
         try{
@@ -25,6 +31,14 @@ public abstract class MasterSquirrel extends Squirrel {
         }
     }
 
+    /**
+     * to Create an MiniSquirrelBot with a specific Energy
+     * @param direction
+     * @param energy
+     * @param context
+     * @throws NotEnoughEnergyExeption occurs when energy is higher than MasterSquirrels Energy
+     * @return
+     */
     public MiniSquirrel createMiniBot(XY direction , int energy, EntityContext context){
         logger.info("MINI_SQUIRREL_BOT spawned");
         try{
@@ -41,6 +55,11 @@ public abstract class MasterSquirrel extends Squirrel {
         }
     }
 
+    /**
+     * check, if the MiniSquirrel is mine or an enemy
+     * @param e
+     * @return
+     */
     public boolean checkEntitie(Entity e){
         if(e instanceof MiniSquirrel)
             if(((MiniSquirrel)e).getMaster() == this){

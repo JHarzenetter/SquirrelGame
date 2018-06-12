@@ -8,6 +8,9 @@ import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Implementation from Console input
+ */
 public class GameImpl extends Game {
 
     private FlattenedBoard fb;
@@ -32,6 +35,9 @@ public class GameImpl extends Game {
         fb = state.flattenedBoard();
     }
 
+    /**
+     * to handle the input from Console
+     */
     public void processInput(){
         do{
             c = ui.getCommand();

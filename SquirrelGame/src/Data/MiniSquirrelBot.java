@@ -35,6 +35,10 @@ public class MiniSquirrelBot extends MiniSquirrel{
             this.mini = mini;
         }
 
+        /**
+         * get a View rectangle corner
+         * @return
+         */
         @Override
         public XY getViewLowerLeft() {
             if(mini.getPlace().getX()-viewSize >= 0 && mini.getPlace().getY()+viewSize <= context.getSize().getY()){
@@ -48,6 +52,10 @@ public class MiniSquirrelBot extends MiniSquirrel{
             }
         }
 
+        /**
+         * get a View rectangle corner
+         * @return
+         */
         @Override
         public XY getViewUpperRight() {
             if(mini.getPlace().getX()+viewSize <= context.getSize().getX() && mini.getPlace().getY()-viewSize >= 0){
@@ -66,6 +74,10 @@ public class MiniSquirrelBot extends MiniSquirrel{
             return null;
         }
 
+        /**
+         * get the direction where the Master is located
+         * @return
+         */
         @Override
         public XY directionOfMaster() {
             if(master.getPlace().getX() < getPlace().getX() && master.getPlace().getY() < getPlace().getY()){
@@ -115,6 +127,10 @@ public class MiniSquirrelBot extends MiniSquirrel{
 
         }
 
+        /**
+         * to Implode and deal damage to the surrounding environment
+         * @param impactRadius
+         */
         @Override
         public void implode(int impactRadius){
             if(!(impactRadius >= 2 && impactRadius <=10)){

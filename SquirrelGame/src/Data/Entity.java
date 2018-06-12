@@ -1,5 +1,8 @@
 package Data;
 
+/**
+ * The main Overclass of the Entities.
+ */
 public abstract class Entity {
 
     private int ID;
