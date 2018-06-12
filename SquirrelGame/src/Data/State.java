@@ -3,10 +3,10 @@ package Data;
 public class State {
 
     private int highScore;
-    private Board b;
+    private Board board;
 
     public State(Board b){
-        this.b = b;
+        this.board = b;
         highScore = 0;
     }
 
@@ -15,10 +15,10 @@ public class State {
     }
 
     public FlattenedBoard flattenedBoard(){
-        return b.flattened();
+        return board.flattened();
     }
 
     public void update(){
-        b.update();
+        board.update();
     }
 }
