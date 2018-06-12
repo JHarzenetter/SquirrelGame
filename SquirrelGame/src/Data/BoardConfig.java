@@ -26,11 +26,12 @@ public class BoardConfig {
 
     //21 + 40 + 40 + 49 + 49 = 199
     public BoardConfig() {
-        file = new File("C:/Users/johan/IdeaProjects/SquirrelGame/BoardConfig.properties");
+        file = new File("BoardConfig.properties");
         if (file.exists()) {
             try {
                 BufferedInputStream reader = new BufferedInputStream(new FileInputStream(file));
                 properties.load(reader);
+                System.out.println(properties);
                 length = Integer.parseInt(properties.getProperty("length"));
                 height = Integer.parseInt(properties.getProperty("height"));
                 remainingSteps = Integer.parseInt(properties.getProperty("remainingSteps"));
@@ -53,13 +54,16 @@ public class BoardConfig {
             remainingSteps = -1;
             amountOfBots = 0;
             amountOfHandOperated = 1;
-            amountOfBadBeast = amountOfGoodBeast = amountOfBadPlant = amountOfGoodPlant = 4;
+            amountOfBadBeast = 4;
+            amountOfGoodBeast = 4;
+            amountOfBadPlant = 4;
+            amountOfGoodPlant = 4;
             amountOfWall = 5;
         }
     }
 
     public BoardConfig(String s) {
-        file = new File("C:/Users/johan/IdeaProjects/SquirrelGame/BoardConfigBots.properties");
+        file = new File("BoardConfigBots.properties");
         if (file.exists()) {
             try {
                 BufferedInputStream reader = new BufferedInputStream(new FileInputStream(file));
